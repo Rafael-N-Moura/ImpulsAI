@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { FileUpload } from '@/components/FileUpload';
 import { PositionInput } from '@/components/PositionInput';
 import { Button } from '@/components/ui/button';
@@ -8,6 +9,7 @@ const Index = () => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [targetPosition, setTargetPosition] = useState('');
   const { toast } = useToast();
+  const navigate = useNavigate();
 
   const handleFileSelect = (file: File) => {
     setSelectedFile(file);
@@ -40,6 +42,11 @@ const Index = () => {
       title: "Análise iniciada",
       description: "Sua carreira está sendo analisada por IA...",
     });
+
+    // Navigate to results page with position parameter
+    setTimeout(() => {
+      navigate(`/results?position=${encodeURIComponent(targetPosition)}`);
+    }, 2000);
   };
 
   return (
