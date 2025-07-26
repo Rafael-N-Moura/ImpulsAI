@@ -10,6 +10,7 @@ const Index = () => {
   const [targetPosition, setTargetPosition] = useState('');
   const { toast } = useToast();
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
 
   const handleFileSelect = (file: File) => {
     setSelectedFile(file);
@@ -19,7 +20,7 @@ const Index = () => {
     });
   };
 
-  const handleAnalyze = () => {
+  const handleAnalyze = async () => {
     if (!selectedFile) {
       toast({
         title: "Erro",
@@ -31,7 +32,7 @@ const Index = () => {
 
     if (!targetPosition.trim()) {
       toast({
-        title: "Erro", 
+        title: "Erro",
         description: "Por favor, digite seu cargo alvo.",
         variant: "destructive",
       });
@@ -42,11 +43,23 @@ const Index = () => {
       title: "Análise iniciada",
       description: "Sua carreira está sendo analisada por IA...",
     });
-
-    // Navigate to results page with position parameter
-    setTimeout(() => {
-      navigate(`/results?position=${encodeURIComponent(targetPosition)}`);
-    }, 2000);
+    setLoading(true);
+    try {
+      const formData = new FormData();
+      formData.append('cv', selectedFile);
+      formData.append('cargoAlmejado', targetPosition);
+      const response = await fetch('http://localhost:4000/analyze', {
+        method: 'POST',
+        body: formData,
+      });
+      if (!response.ok) throw new Error('Erro na análise');
+      const data = await response.json();
+      navigate('/results', { state: { resultado: data, cargoAlmejado: targetPosition } });
+    } catch (err) {
+      toast({ title: "Erro", description: "Falha ao analisar carreira.", variant: "destructive" });
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -68,19 +81,20 @@ const Index = () => {
           <FileUpload onFileSelect={handleFileSelect} />
 
           {/* Position Input */}
-          <PositionInput 
+          <PositionInput
             value={targetPosition}
             onChange={setTargetPosition}
           />
 
           {/* Analyze Button */}
-          <Button 
+          <Button
             variant="analyze"
             size="lg"
             className="w-full h-14 text-lg"
             onClick={handleAnalyze}
+            disabled={loading}
           >
-            Analisar Carreira
+            {loading ? 'Analisando...' : 'Analisar Carreira'}
           </Button>
         </div>
       </div>

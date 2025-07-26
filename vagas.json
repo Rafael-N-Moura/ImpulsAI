@@ -1,0 +1,84 @@
+[
+    {
+        "cargo": "Desenvolvedor Full Stack",
+        "empresa": "TechCorp",
+        "localizacao": "São Paulo, SP",
+        "competencias": [
+            "JavaScript",
+            "React.js",
+            "Node.js",
+            "TypeScript",
+            "Docker",
+            "Git",
+            "AWS",
+            "PostgreSQL",
+            "MongoDB",
+            "CI/CD"
+        ]
+    },
+    {
+        "cargo": "Desenvolvedor Backend",
+        "empresa": "InovaTech",
+        "localizacao": "Rio de Janeiro, RJ",
+        "competencias": [
+            "Java",
+            "Spring Boot",
+            "PostgreSQL",
+            "Docker",
+            "Kubernetes",
+            "AWS",
+            "Microservices",
+            "REST APIs",
+            "Git"
+        ]
+    },
+    {
+        "cargo": "Desenvolvedor Frontend",
+        "empresa": "Digital Solutions",
+        "localizacao": "Belo Horizonte, MG",
+        "competencias": [
+            "React.js",
+            "TypeScript",
+            "JavaScript",
+            "HTML",
+            "CSS",
+            "Git",
+            "REST APIs",
+            "Responsive Design",
+            "UI/UX"
+        ]
+    },
+    {
+        "cargo": "Desenvolvedor DevOps",
+        "empresa": "CloudTech",
+        "localizacao": "Curitiba, PR",
+        "competencias": [
+            "Docker",
+            "Kubernetes",
+            "AWS",
+            "Azure",
+            "Jenkins",
+            "GitLab CI",
+            "Terraform",
+            "Linux",
+            "Bash",
+            "Python"
+        ]
+    },
+    {
+        "cargo": "Desenvolvedor Mobile",
+        "empresa": "AppStudio",
+        "localizacao": "Porto Alegre, RS",
+        "competencias": [
+            "React Native",
+            "JavaScript",
+            "TypeScript",
+            "Git",
+            "REST APIs",
+            "Mobile Development",
+            "UI/UX",
+            "App Store",
+            "Google Play"
+        ]
+    }
+]

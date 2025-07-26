@@ -1,0 +1,80 @@
+[
+    {
+        "nome": "Curso Completo de JavaScript",
+        "plataforma": "Udemy",
+        "url": "https://www.udemy.com/course/javascript-completo/",
+        "competencia": "JavaScript"
+    },
+    {
+        "nome": "React - The Complete Guide",
+        "plataforma": "Udemy",
+        "url": "https://www.udemy.com/course/react-the-complete-guide/",
+        "competencia": "React.js"
+    },
+    {
+        "nome": "Node.js: The Complete Guide",
+        "plataforma": "Udemy",
+        "url": "https://www.udemy.com/course/nodejs-the-complete-guide/",
+        "competencia": "Node.js"
+    },
+    {
+        "nome": "TypeScript: The Complete Developer's Guide",
+        "plataforma": "Udemy",
+        "url": "https://www.udemy.com/course/typescript-the-complete-developers-guide/",
+        "competencia": "TypeScript"
+    },
+    {
+        "nome": "Docker Mastery: with Kubernetes +Swarm",
+        "plataforma": "Udemy",
+        "url": "https://www.udemy.com/course/docker-mastery/",
+        "competencia": "Docker"
+    },
+    {
+        "nome": "Git Complete: The definitive, step-by-step guide",
+        "plataforma": "Udemy",
+        "url": "https://www.udemy.com/course/git-complete/",
+        "competencia": "Git"
+    },
+    {
+        "nome": "AWS Certified Cloud Practitioner",
+        "plataforma": "Coursera",
+        "url": "https://www.coursera.org/specializations/aws-cloud-practitioner",
+        "competencia": "AWS"
+    },
+    {
+        "nome": "PostgreSQL for Everybody",
+        "plataforma": "Coursera",
+        "url": "https://www.coursera.org/specializations/postgresql-for-everybody",
+        "competencia": "PostgreSQL"
+    },
+    {
+        "nome": "MongoDB University",
+        "plataforma": "MongoDB",
+        "url": "https://university.mongodb.com/",
+        "competencia": "MongoDB"
+    },
+    {
+        "nome": "Jenkins Pipeline Tutorial",
+        "plataforma": "Jenkins",
+        "url": "https://www.jenkins.io/doc/book/pipeline/",
+        "competencia": "CI/CD"
+    },
+    {
+        "nome": "Kubernetes for Beginners",
+        "plataforma": "Coursera",
+        "url": "https://www.coursera.org/learn/kubernetes-basics",
+        "competencia": "Kubernetes"
+    },
+    {
+        "nome": "Microservices Architecture",
+        "plataforma": "edX",
+        "url": "https://www.edx.org/course/microservices-architecture",
+        "competencia": "Microservices"
+    },
+    {
+        "nome": "REST API Design",
+        "plataforma": "Coursera",
+        "url": "https://www.coursera.org/learn/api-design",
+        "competencia": "REST APIs"
+    }
+]
