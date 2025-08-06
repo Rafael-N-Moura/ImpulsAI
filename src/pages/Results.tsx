@@ -45,6 +45,23 @@ const Results = () => {
   const [loadingOtimizacao, setLoadingOtimizacao] = useState(false);
   const [otimizacaoError, setOtimizacaoError] = useState<string | null>(null);
   const [textoCV, setTextoCV] = useState<string>('');
+  const [textoOtimizado, setTextoOtimizado] = useState<string>('');
+
+  // Função para aplicar as sugestões ao texto original
+  const aplicarSugestoes = (textoOriginal: string, sugestoes: any[]) => {
+    let textoOtimizado = textoOriginal;
+
+    sugestoes.forEach(sugestao => {
+      if (sugestao.original && sugestao.suggestion) {
+        textoOtimizado = textoOtimizado.replace(
+          new RegExp(sugestao.original.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi'),
+          sugestao.suggestion
+        );
+      }
+    });
+
+    return textoOtimizado;
+  };
 
   // Usar o texto do CV que vem do resultado da análise inicial
   useEffect(() => {
@@ -75,6 +92,10 @@ const Results = () => {
       const data = await response.json();
       console.log('✅ Sugestões recebidas:', data);
       setSugestoes(data);
+
+      // Aplicar as sugestões ao texto original
+      const textoOtimizado = aplicarSugestoes(textoCV, data);
+      setTextoOtimizado(textoOtimizado);
     } catch (err: any) {
       console.error('❌ Erro na otimização:', err);
       setOtimizacaoError('Erro ao otimizar currículo.');
@@ -255,10 +276,30 @@ const Results = () => {
               <div>
                 <Card>
                   <CardHeader>
-                    <CardTitle className="text-foreground">Seu Currículo Analisado</CardTitle>
+                    <CardTitle className="text-foreground flex items-center gap-2">
+                      <Edit3 className="h-5 w-5" />
+                      Currículo Otimizado
+                    </CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-4 font-mono text-sm">
-                    {textoCV ? (
+                    {textoOtimizado ? (
+                      <div className="space-y-4">
+                        <div className="border-t pt-4">
+                          <h4 className="font-semibold mb-2 text-green-600">Versão Otimizada</h4>
+                          <div className="bg-green-50 p-3 rounded text-xs max-h-60 overflow-y-auto border border-green-200">
+                            <pre className="whitespace-pre-wrap text-green-800">{textoOtimizado}</pre>
+                          </div>
+                        </div>
+                        {textoCV && (
+                          <div className="border-t pt-4">
+                            <h4 className="font-semibold mb-2 text-muted-foreground">Versão Original</h4>
+                            <div className="bg-muted/30 p-3 rounded text-xs max-h-40 overflow-y-auto">
+                              <pre className="whitespace-pre-wrap text-muted-foreground">{textoCV}</pre>
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    ) : textoCV ? (
                       <div className="space-y-4">
                         <div className="border-t pt-4">
                           <h4 className="font-semibold mb-2">Texto Extraído do Currículo</h4>
