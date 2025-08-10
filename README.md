@@ -1,73 +1,36 @@
-# Welcome to your Lovable project
+ImpulsAI
+O seu assistente inteligente para otimizar currículos e conquistar vagas.
+Problema que o projeto resolve (e por que é importante)
+Candidatos frequentemente perdem oportunidades valiosas porque seus currículos não estão otimizados para a vaga específica. A triagem inicial, realizada tanto por recrutadores quanto por sistemas automatizados (ATS - Applicant Tracking Systems), pode descartar currículos por falta de alinhamento com palavras-chave, formatação inadequada ou ausência de informações relevantes.
 
-## Project info
+O ImpulsAI aborda esse problema ao democratizar o acesso a recursos avançados de IA, eliminando a necessidade de o usuário ter conhecimento em prompt engineering ou em LLMs (Large Language Models) para otimizar seu documento. A importância de nossa solução reside em nivelar o campo de jogo, garantindo que o potencial do candidato seja avaliado de forma justa e não seja descartado prematuramente devido a um currículo desatualizado ou não direcionado.
 
-**URL**: https://lovable.dev/projects/dd1e8dc4-3751-4cb6-8b21-66e47bd3b92d
+Solução proposta
+O ImpulsAI é uma plataforma de software como serviço (SaaS) que utiliza um motor de agentes inteligentes para analisar a descrição da vaga e o currículo do usuário. A ferramenta não se limita a um simples gerador de texto, mas oferece uma solução completa para a preparação do candidato.
 
-## How can I edit this code?
+A plataforma entrega um pacote de outputs estruturados, que incluem:
 
-There are several ways of editing your application.
+Customização Inteligente do Currículo: Sugestões precisas de palavras-chave, habilidades e ajustes de conteúdo para otimizar o currículo para a vaga.
 
-**Use Lovable**
+Guia de Preparação para Entrevistas: Um roteiro com perguntas e respostas-modelo para entrevistas de fit cultural e técnico, baseado nos requisitos da posição.
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/dd1e8dc4-3751-4cb6-8b21-66e47bd3b92d) and start prompting.
+Roadmaps de Aprendizado: Sugestões de cursos e trilhas de estudo para que o candidato possa preencher lacunas de conhecimento e se preparar tecnicamente para a vaga.
 
-Changes made via Lovable will be committed automatically to this repo.
+Desafios enfrentados e como foram superados
+(Esta seção deve ser preenchida posteriormente, com base na experiência de desenvolvimento.)
 
-**Use your preferred IDE**
+Decisões técnicas e seus trade-offs
+(Esta seção deve ser preenchida posteriormente, com base nas escolhas de arquitetura e tecnologia.)
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+Aprendizados e próximos passos
+O desenvolvimento desta versão inicial nos permitiu validar a abordagem monolítica, que se mostrou eficaz para o rápido desenvolvimento e implantação do protótipo. A adoção da metodologia BDD (Behavior-Driven Development) nos ensinou a manter o foco no valor para o usuário, garantindo que o escopo seja gerenciável e que a qualidade do produto seja a prioridade.
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+Para os próximos passos, planejamos expandir as funcionalidades do projeto, considerando os seguintes pontos que estão fora do escopo atual:
 
-Follow these steps:
+Adicionar suporte para a criação de currículos do zero, a partir de formulários.
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+Integrar a plataforma com APIs de emprego para busca automatizada de vagas.
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+Desenvolver um dashboard para acompanhamento de candidaturas.
 
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
-
-**Edit a file directly in GitHub**
-
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
-
-**Use GitHub Codespaces**
-
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/dd1e8dc4-3751-4cb6-8b21-66e47bd3b92d) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+Suporte a múltiplos idiomas.
