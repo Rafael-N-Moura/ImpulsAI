@@ -1,6 +1,7 @@
 ## C4 Diagram - ImpulsAI
 
 ### Contexto
+---
 ```mermaid
 C4Context
     title Diagrama de Contexto do Sistema (Nível 1)
@@ -17,6 +18,7 @@ C4Context
 O Candidato é o usuário principal, que interage com o ImpulsAI. O ImpulsAI é o sistema que coordena as informações e fornece a solução. A API do Gemini é um sistema externo essencial que fornece a inteligência artificial para o processamento dos dados.
 
 ### Contêiners
+---
 Este diagrama amplia a visão do sistema ImpulsAI, dividindo-o em seus principais contêineres tecnológicos. Ele detalha a arquitetura monolítica, mostrando como os componentes principais interagem.
 ```mermaid
 C4Container
@@ -48,6 +50,7 @@ Descrição:
 * API do Gemini: O contêiner externo que fornece a inteligência artificial.
 
 ### Componentes
+---
 Este diagrama detalha o contêiner Backend Monolítico, exibindo os principais componentes de software, suas responsabilidades e as interações entre eles.
 ```mermaid
 C4Component
