@@ -369,45 +369,75 @@ Este diagrama descreve como a informação se move entre os principais component
 
 ## 3\. Detalhes Técnicos e de Implementação
 
-### 3.1. Estrutura do Código
+### 3.1. Tecnologias e Dependências
 
-Descreva a organização do repositório de código, a estrutura de diretórios e convenções de nomenclatura.
+Esta seção lista as principais tecnologias, frameworks e bibliotecas utilizadas no desenvolvimento do projeto ImpulsAI.
 
-  * **Estrutura de Diretórios:**
-    ```
-    /src
-    ├── /api
-    ├── /components
-    ├── /services
-    └── /tests
-    ```
-  * **Convenções de Nomenclatura:** Explique as convenções adotadas para variáveis, funções, classes, etc. (Ex.: camelCase para variáveis, PascalCase para classes).
+  * **Linguagens de Programação:** JavaScript (ES6+) e Python 3.x (para serviços de IA, se aplicável)
+  * **Frameworks:** Node.js (v18.x) e Express.js para back-end, React.js (v18.x) para front-end e Tailwind CSS (v3.x) para estilização.
+  * **Bancos de Dados:** N/A. Atualmente o projeto utiliza arquivos JSON estáticos para dados de vagas e cursos.
+  * **Bibliotecas e Pacotes:**
+    * Back-end:
+      * `axios`: Para requisições HTTP e APIs externas (como a do Gemini);
+      * `pdf-parser`: Para extrair texto de arquivos PDF;
+      * `cors`: Para habilitar a comunicação entre o front-end e o back-end;
+    * Front-end:
+      * `react-router-dom`: Para gerenciamento de rotas;
+      * `react-icons` ou similar: Para ícones.
 
-### 3.2. Tecnologias e Dependências
+### 3.2. Configuração e Ambiente
 
-Uma lista completa das tecnologias, linguagens, frameworks e bibliotecas usadas, incluindo as versões.
+#### 3.2.1. Pré-requisitos
 
-  * **Linguagens de Programação:** [Ex.: JavaScript (ES6+), Python 3.9]
-  * **Frameworks:** [Ex.: React, Node.js, Spring Boot]
-  * **Bancos de Dados:** [Ex.: PostgreSQL 14, MongoDB 5.0]
-  * **Bibliotecas e Pacotes:** [Ex.: Lodash, Axios, Moment.js]
+* Node.js: A versão 18.x ou superior constitui um pré-requisito para a operação dos componentes de backend e frontend.
 
-### 3.3. Configuração e Ambiente
+* npm: Fornecido com a instalação do Node.js, é empregado para a gestão das dependências do projeto.
 
-Instruções claras sobre como configurar e rodar o projeto em um ambiente de desenvolvimento.
+* Editor de código: Recomenda-se enfaticamente a utilização de um ambiente de desenvolvimento integrado (IDE) robusto, como o Visual Studio Code, para otimizar o fluxo de trabalho de codificação.
 
-  * **Pré-requisitos:** Liste o software necessário (Ex.: Node.js, Docker, Java JDK).
-  * **Passos de Instalação:** Detalhe os comandos para clonar o repositório, instalar dependências e iniciar o servidor de desenvolvimento.
+#### 3.2.2. Instalação
 
-### 3.4. Testes
+* **Clonagem do Repositório:** O processo é iniciado com o acesso ao terminal e a execução do comando de clonagem do repositório Git, seguido pela navegação para o diretório do projeto:
 
-Descreva a estratégia de testes do projeto.
+```
+git clone https://github.com/seu-usuario/impulsa-ai.git
+cd impulsa-ai
+```
 
-  * **Tipos de Testes:** Explique quais tipos de testes são realizados (unitários, de integração, end-to-end).
-  * **Ferramentas:** Mencione as ferramentas utilizadas (Ex.: Jest, Cypress, JUnit).
-  * **Como Rodar os Testes:** Comandos para executar a suíte de testes.
+* **Instalação das Dependências do Backend:** No diretório do backend, procede-se à instalação das dependências necessárias para o servidor:
+```
+cd backend
+npm install
+```
 
------
+* **Instalação das Dependências do Frontend:** Após a conclusão do passo anterior, retorne ao diretório raiz, navegue para o diretório do frontend e realize a instalação das dependências da interface:
+```
+cd ../frontend
+npm install
+```
+
+* **Configuração do Ambiente:** A configuração do ambiente requer a criação de um arquivo de configuração .env no diretório do backend e a inserção da chave da API do Gemini, conforme o formato especificado:
+```
+API_GEMINI_KEY=sua_chave_aqui
+```
+
+#### 3.2.3. Instruções de Execução do Projeto
+
+* **Inicialização do Servidor de Backend:** No diretório correspondente ao backend, execute o comando para iniciar o servidor:
+```
+cd backend
+npm start
+```
+
+O servidor estará acessível no endereço http://localhost:3001.
+
+* **Inicialização da Aplicação de Frontend:** Em uma nova instância de terminal, navegue até o diretório do frontend e execute o comando para iniciar a aplicação:
+```
+cd frontend
+npm start
+```
+
+A interface da aplicação será automaticamente carregada no endereço http://localhost:3000 no navegador padrão.
 
 ## 4\. Deploy e Operação
 
