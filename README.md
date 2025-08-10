@@ -24,9 +24,9 @@ Durante o desenvolvimento do projeto, a equipe se deparou com desafios técnicos
 
 A nível de negócio, o desafio mais notável foi a diferenciação do produto em um mercado dominado por concorrentes de peso como o Gemini e o ChatGPT. A superação desse desafio se deu ao focar na proposta de valor única do ImpulsAI: a especialização no problema de triagem de currículos, a abstração da complexidade da IA e a entrega de uma solução completa de preparação de carreira, indo além da simples geração de texto.
 
-### Decisões técnicas, de design e seus trade-offs
+### Decisões Técnicas, de Design e seus _trade-offs_
 ---
-O projeto foi concebido com o auxílio da inteligência artificial, que atuou como uma ferramenta de apoio e não como um agente resolvedor único. Essa abordagem ética garantiu que as decisões estratégicas fossem tomadas pela equipe, com a IA acelerando a documentação e a prototipação.
+O projeto foi concebido com o auxílio de inteligência artificial e _prompt engineering_, que atuou como uma ferramenta de apoio e não como um agente resolvedor único. Essa abordagem ética garantiu que as decisões estratégicas fossem tomadas pela equipe, com a IA acelerando a documentação e a prototipação. Para mais detalhes, consultar a [Documentação Técnica](docs/technical_doc.md).
 
 #### Principais decisões técnicas:
 
