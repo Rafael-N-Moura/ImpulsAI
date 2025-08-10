@@ -442,18 +442,38 @@ A interface da aplicação será automaticamente carregada no endereço http://l
 ## 4\. Deploy e Operação
 
 ### 4.1. Ambiente de Produção
+#### 4.1.1. Infraestrutura
 
-Descreva como o software é implantado em produção.
+* **Plataforma de Hospedagem:**
 
-  * **Infraestrutura:** [Ex.: AWS, Google Cloud, On-Premise]
-  * **Ferramentas de CI/CD:** [Ex.: Jenkins, GitHub Actions, GitLab CI]
-  * **Passos do Deploy:** Uma lista de verificação ou guia passo a passo do processo de implantação.
+* **Servidor Web:**
+
+* **Ferramentas de CI/CD:** Não se aplica na versão atual. O deploy é realizado manualmente.
+
+#### 4.1.2. Passos do Deploy
+O processo de deploy para a arquitetura monolítica é realizado de forma manual, seguindo os passos abaixo:
+
+**1. Build do Frontend:** Na pasta do frontend, execute o comando para gerar a versão otimizada da aplicação.
+```
+npm run build
+```
+
+**2. Sincronização dos Arquivos:** Copie a pasta build do frontend e todo o diretório do backend para o servidor de produção, utilizando ferramentas como scp ou rsync.
+
+**3. Instalação das Dependências:** No servidor de produção, navegue até o diretório do backend e instale as dependências.
+```
+npm install
+```
+
+**4. Inicialização do Servidor:** Inicie o servidor do backend em segundo plano, utilizando uma ferramenta como o pm2 para garantir que a aplicação continue rodando em caso de falha.
+```
+pm2 start server.js
+```
 
 ### 4.2. Monitoramento e Logs
 
-Como a saúde do sistema é monitorada?
+* **Ferramentas de Monitoramento:** Não se aplica na versão atual. O monitoramento de um protótipo é frequentemente realizado de forma reativa, sem ferramentas dedicadas.
 
-  * **Ferramentas de Monitoramento:** [Ex.: Prometheus, Grafana, Datadog]
-  * **Logs:** Onde os logs são armazenados e como acessá-los.
+* **Armazenamento de Logs:** Os logs de erros e de acesso são armazenados diretamente no servidor de produção, geralmente em arquivos de texto gerados pela própria aplicação ou pelo servidor de proxy reverso (Nginx).
 
------
+* **Acesso aos Logs:** Para acessar os logs, é necessário conectar-se ao servidor via SSH. A visualização pode ser feita usando comandos de terminal como `cat` ou `tail -f` nos arquivos de log. O pm2 também oferece uma interface para visualização de logs.
