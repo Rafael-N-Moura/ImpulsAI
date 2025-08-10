@@ -18,7 +18,7 @@ O Candidato é o usuário principal, que interage com o ImpulsAI. O ImpulsAI é 
 
 ### Contêiners
 Este diagrama amplia a visão do sistema ImpulsAI, dividindo-o em seus principais contêineres tecnológicos. Ele detalha a arquitetura monolítica, mostrando como os componentes principais interagem.
-
+```mermaid
 C4Container
     title Diagrama de Contêineres (Nível 2 - Arquitetura Monolítica)
     Person(candidate, "Candidato", "Profissional em busca de emprego")
@@ -35,16 +35,17 @@ C4Container
     Rel(webapp, backend, "Chamadas de API REST", "JSON/HTTP")
     Rel(backend, db_json, "Lê dados estáticos")
     Rel(backend, gemini_api, "Solicita processamento de IA (Prompts)")
+```
 
 Descrição:
 
-Aplicação Web (Frontend): O contêiner de apresentação, executado no navegador do usuário, responsável pela interface.
+* Aplicação Web (Frontend): O contêiner de apresentação, executado no navegador do usuário, responsável pela interface.
 
-Backend Monolítico: O contêiner que centraliza toda a lógica de negócio, autenticação e orquestração dos serviços.
+* Backend Monolítico: O contêiner que centraliza toda a lógica de negócio, autenticação e orquestração dos serviços.
 
-Dados Estáticos (Arquivos JSON): O contêiner de persistência, que armazena os dados de referência para o sistema.
+* Dados Estáticos (Arquivos JSON): O contêiner de persistência, que armazena os dados de referência para o sistema.
 
-API do Gemini: O contêiner externo que fornece a inteligência artificial.
+* API do Gemini: O contêiner externo que fornece a inteligência artificial.
 
 ### Componentes
 Este diagrama detalha o contêiner Backend Monolítico, exibindo os principais componentes de software, suas responsabilidades e as interações entre eles.
