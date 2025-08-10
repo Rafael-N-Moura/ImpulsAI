@@ -290,27 +290,58 @@ Os cenários abaixo são exemplos detalhados de testes, escritos em Gherkin.
 
 ### 2.1. Visão Arquitetural
 
-Descreva a arquitetura geral do sistema. Que padrão arquitetural foi utilizado (microserviços, monolítico, MVC, etc.)?
+### 2.2. Fluxo de Dados e Processos
 
-  * **Diagrama de Arquitetura:** Um diagrama visual que mostra os principais componentes, módulos e como eles se comunicam. Ferramentas como o **C4 Model** ou diagramas de blocos são altamente recomendados.
+#### 2.2.1. Fluxo do Usuário (User Flow)
 
-### 2.2. Componentes Principais
+Este diagrama detalha a jornada do usuário na funcionalidade principal do ImpulsAI: a otimização de currículos e a geração do guia de preparação. O fluxo ilustra cada passo, desde a entrada de dados até a visualização do resultado final.
 
-Liste e descreva os principais componentes ou serviços do sistema.
+```mermaid
+    graph TD
+        A[Usuário] --> B["Página Inicial"]
+        B --> C["Login / Cadastro"]
+        C --> D["Página de Upload<br>(Currículo e Vaga)"]
+        D --> E["Processamento da IA<br>Agentes Inteligentes"]
+        E --> F["Geração de Sugestões<br>Currículo Otimizado & Guias"]
+        F --> G["Página de Resultados<br>Visualização"]
+        G --> H["Salvar Informações<br>e Encerrar Sessão"]
+        H --> I((Fim))
+```
 
-  * **[Nome do Componente/Serviço]:**
-      * **Descrição:** O que este componente faz? Qual sua responsabilidade?
-      * **Tecnologias:** Quais linguagens, frameworks ou bibliotecas ele utiliza?
-      * **Comunicação:** Como ele interage com outros componentes (REST API, mensageria, etc.)?
+**Descrição do Fluxo:**
 
-### 2.3. Fluxo de Dados e Processos
+1.  O **Usuário** acessa a **Página Inicial** e pode optar por fazer o **Login/Cadastro**.
+2.  Após a autenticação, ele é direcionado à **Página de Upload**, onde pode inserir o currículo e a descrição da vaga.
+3.  Com os dados submetidos, o sistema inicia o **Processamento da IA** por meio dos agentes inteligentes.
+4.  O sistema então realiza a **Geração de Sugestões**, criando o currículo otimizado e os guias de preparação.
+5.  O usuário é levado à **Página de Resultados** para a **Visualização** do conteúdo gerado.
+6.  Ao final da jornada, o usuário pode salvar as informações e encerrar a sessão.
 
-Explique o fluxo de dados em processos-chave do sistema.
+### 2.2.2. Fluxo de Dados (Data Flow)
 
-  * **Fluxo do Usuário (User Flow):** Um diagrama ou descrição textual que mostra a jornada do usuário em uma funcionalidade específica (Ex.: "Criação de Conta").
-  * **Fluxo de Dados:** Como a informação se move através dos diferentes componentes do sistema.
+Este diagrama descreve como a informação se move entre os principais componentes da arquitetura do ImpulsAI. O fluxo ilustra o caminho dos dados, desde a submissão pelo usuário até o armazenamento e o retorno para a interface.
 
------
+```mermaid
+    flowchart TD
+        A[Frontend] -->|Dados de Login/Cadastro| B[Backend]
+        A -->|Currículo & Vaga| C[Backend]
+        C -->|Requisição de Análise| D[Serviços de IA]
+        D -->|Sugestões e Guias| C
+        C -->|Salvar Dados| E[Banco de Dados]
+        E -->|Dados do Usuário| B
+        C -->|Resultados da Análise| A
+        B -->|Token de Autenticação| A
+        A -->|Visualização de Resultados| F[Usuário]
+```
+
+**Descrição do Fluxo:**
+
+1.  O **Frontend** envia dados de login para o **Backend** (`Serviço de Autenticação`), que retorna um token após a validação.
+2.  Quando o usuário faz o upload, o **Frontend** envia o currículo e a vaga para o **Backend** (`Serviço de Análise`).
+3.  O `Serviço de Análise` envia uma **requisição de análise** para os **Serviços de IA**, que processam a informação.
+4.  Os **Serviços de IA** retornam as **sugestões e os guias** para o `Serviço de Análise`.
+5.  O `Serviço de Análise` armazena os dados do usuário, currículos e resultados no **Banco de Dados**.
+6.  Finalmente, o **Backend** envia os **resultados da análise** de volta para o **Frontend**, que exibe as informações para o **Usuário**.
 
 ## 3\. Detalhes Técnicos e de Implementação
 
