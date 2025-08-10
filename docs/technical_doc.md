@@ -308,10 +308,10 @@ A aplicação front-end, construída em React, está integrada e se comunica dir
 
         System_Ext(gemini_api, "API do Gemini", "Serviço de IA do Google")
 
-        candidate --> webapp: Interage através do navegador
-        webapp --> backend: Chamadas de API REST
-        backend --> db_json: Lê dados estáticos
-        backend --> gemini_api: Solicita processamento de IA (Prompts)
+        Rel(candidate, webapp, "Interage através do navegador")
+        Rel(webapp, backend, "Chamadas de API REST")
+        Rel(backend, db_json, "Lê dados estáticos")
+        Rel(backend, gemini_api, "Solicita processamento de IA (Prompts)")
 ```
 
 ### 2.2. Fluxo de Dados e Processos
