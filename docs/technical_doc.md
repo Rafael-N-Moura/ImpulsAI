@@ -290,6 +290,30 @@ Os cenários abaixo são exemplos detalhados de testes, escritos em Gherkin.
 
 ### 2.1. Visão Arquitetural
 
+A arquitetura do ImpulsAI, em sua versão atual, adota um padrão monolítico. Esta abordagem concentra todas as funcionalidades do sistema em uma única aplicação, o que simplifica o desenvolvimento e a implantação inicial. O projeto é estruturado em torno de um servidor Express.js central, que hospeda todos os endpoints da API, e um conjunto de serviços modulares que coexistem no mesmo processo.
+
+A aplicação front-end, construída em React, está integrada e se comunica diretamente com o backend via requisições HTTP. Para persistência de dados de forma simplificada, o sistema utiliza arquivos JSON estáticos para armazenar informações como vagas de emprego e cursos.
+
+```mermaid
+    C4Container
+        title Diagrama de Contêineres (Arquitetura Monolítica)
+
+        Person(candidate, "Candidato", "Profissional em busca de emprego")
+
+        System_Boundary(impulsa_ai, "ImpulsAI") {
+            Container(webapp, "Aplicação Web", "React", "Interface do usuário que interage via navegador")
+            Container(backend, "Backend Monolítico", "Node.js, Express", "Servidor único com todos os endpoints e serviços")
+            ContainerDb(db_json, "Dados Estáticos", "Arquivos JSON", "Armazena informações de vagas e cursos")
+        }
+
+        System_Ext(gemini_api, "API do Gemini", "Serviço de IA do Google")
+
+        candidate --> webapp: Interage através do navegador
+        webapp --> backend: Chamadas de API REST
+        backend --> db_json: Lê dados estáticos
+        backend --> gemini_api: Solicita processamento de IA (Prompts)
+```
+
 ### 2.2. Fluxo de Dados e Processos
 
 #### 2.2.1. Fluxo do Usuário (User Flow)
