@@ -20,11 +20,29 @@ A plataforma entrega um pacote de outputs estruturados, que incluem:
 
 ### Desafios Enfrentados
 ---
-(Esta seção deve ser preenchida posteriormente, com base na experiência de desenvolvimento.)
+Durante o desenvolvimento do projeto, a equipe se deparou com desafios técnicos e de negócio significativos. Um dos principais obstáculos técnicos foi a implementação de um sistema robusto de web scraping para a coleta de dados de vagas de emprego. Para viabilizar a entrega do MVP, este desafio foi contornado com a criação de uma base de dados estática (`vagas.json`e `cursos.json`), permitindo que a funcionalidade principal de análise e otimização fosse validada.
+
+A nível de negócio, o desafio mais notável foi a diferenciação do produto em um mercado dominado por concorrentes de peso como o Gemini e o ChatGPT. A superação desse desafio se deu ao focar na proposta de valor única do ImpulsAI: a especialização no problema de triagem de currículos, a abstração da complexidade da IA e a entrega de uma solução completa de preparação de carreira, indo além da simples geração de texto.
 
 ### Decisões técnicas, de design e seus trade-offs
 ---
-(Esta seção deve ser preenchida posteriormente, com base nas escolhas de arquitetura e tecnologia.)
+O projeto foi concebido com o auxílio da inteligência artificial, que atuou como uma ferramenta de apoio e não como um agente resolvedor único. Essa abordagem ética garantiu que as decisões estratégicas fossem tomadas pela equipe, com a IA acelerando a documentação e a prototipação.
+
+#### Principais decisões técnicas:
+
+* **Arquitetura Monolítica:** A escolha de uma arquitetura monolítica com Node.js e React para o MVP permitiu um desenvolvimento rápido e uma implantação simplificada, ideal para validar a ideia de negócio. O trade-off é a menor escalabilidade e flexibilidade em comparação com uma arquitetura de microsserviços.
+
+* **Metodologia BDD:** A adoção do BDD (Behavior-Driven Development) para a escrita de requisitos e casos de teste se mostrou crucial. Essa decisão garante que o foco esteja sempre no valor para o usuário, alinhando as equipes e tornando a comunicação mais eficaz.
+
+* **Armazenamento de Dados:** A decisão de utilizar arquivos JSON estáticos para o MVP foi um trade-off consciente para acelerar o desenvolvimento, evitando a complexidade inicial de um banco de dados relacional ou NoSQL.
+
+### Como Contribuir
+---
+O _ImpulsAI_ é um projeto de código aberto e colaborativo. **Contribuições são sempre bem-vindas**, seja através de sugestões de melhoria, relato de bugs ou novas funcionalidades. Para mais detalhes, por favor, consulte o nosso [guia de contribuição](docs/contribute.md) ou abra uma issue no repositório.
+
+### Como Buildar
+---
+Para configurar e rodar o projeto localmente, siga os pré-requisitos e os passos de instalação detalhados no [arquivo de build](docs/build.md). O processo envolve a clonagem do repositório, a instalação das dependências do backend e do frontend, e a inicialização dos dois servidores em terminais separados.
 
 ### Aprendizados e próximos passos
 ---
@@ -42,15 +60,8 @@ O desenvolvimento desta versão inicial nos permitiu validar a abordagem monolí
 
 ### Nosso Time
 ---
-Nosso time é composto por profissionais com diferentes níveis de experiência e background técnico, cada um com haptidão para diferentes áreas. Dessa maneira, compõe-se a _sinfonia_ perfeita entre desenvolvimento, dados e negócios.
+Nosso time é composto por profissionais com diferentes níveis de experiência e background técnico, cada um com aptidão para diferentes áreas. Dessa maneira, compõe-se a _sinfonia_ perfeita entre desenvolvimento, dados e negócios.
 
 - Ithalo Araujo (iras@cin.ufpe.br): Gerenciamendo de Produto
 - Maria Eduarda de Lima (melg@cin.ufpe.br): Engenharia de Dados
 - Rafael Moura (rnm4@cin.ufpe.br): Desenvolvimento
-
-### Como Contribuir
----
-
-
-### Como Buildar
----
