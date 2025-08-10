@@ -1,10 +1,12 @@
-# **C4 Model para o Projeto "Impulso"**
+# **C4 Model para o Projeto "ImpulsAI"**
 
-Este documento descreve a arquitetura da plataforma "Impulso" utilizando os três principais níveis do C4 Model, conforme os requisitos do projeto.
+Este documento descreve a arquitetura da plataforma "ImpulsAI" utilizando os três principais níveis do C4 Model, conforme os requisitos do projeto.
 
 ## **Nível 1: Diagrama de Contexto**
 
-**Descrição**: Este diagrama mostra a visão mais ampla do sistema. Ele ilustra como o "Impulso" se encaixa em seu ambiente, quem são seus usuários e com quais sistemas externos ele interage.  
+**Descrição**: Este diagrama mostra a visão mais ampla do sistema. Ele ilustra como o "Impulso" se encaixa em seu ambiente, quem são seus usuários e com quais sistemas externos ele interage.
+
+```mermaid
 graph TD  
     A\[\<div style='font-weight: bold'\>Usuário\</div\>\<br\>Estudante ou Profissional\<br\>em busca de orientação de carreira.\] \-- "1. Faz upload do CV e define o cargo-alvo" \--\> B{\<div style='font-size: 1.5rem; font-weight: bold'\>Plataforma Impulso\</div\>\<br\>Sistema de Análise de Carreira com IA};  
     B \-- "2. Envia textos para análise e extração" \--\> C\[\<div style='font-weight: bold'\>Google Gemini API\</div\>\<br\>Sistema externo de IA Generativa.\];  
@@ -14,10 +16,12 @@ graph TD
     style A fill:\#0f172a,stroke:\#22d3ee,stroke-width:2px,color:\#fff  
     style B fill:\#1e293b,stroke:\#22d3ee,stroke-width:4px,color:\#fff  
     style C fill:\#334155,stroke:\#fff,stroke-width:2px,color:\#fff
+```
 
 ## **Nível 2: Diagrama de Contêiner**
 
-**Descrição**: Este diagrama "dá um zoom" no sistema "Impulso", mostrando os principais blocos de construção (contêineres) que o compõem. Ele detalha a arquitetura de alto nível e as tecnologias utilizadas em cada parte.  
+**Descrição**: Este diagrama "dá um zoom" no sistema "Impulso", mostrando os principais blocos de construção (contêineres) que o compõem. Ele detalha a arquitetura de alto nível e as tecnologias utilizadas em cada parte.
+```mermaid
 graph TD  
     subgraph "Sistema Impulso"  
         direction LR  
@@ -45,10 +49,12 @@ graph TD
     style D fill:\#334155,stroke:\#fff,stroke-width:1px,color:\#fff  
     style Usuario fill:\#0f172a,stroke:\#22d3ee,stroke-width:2px,color:\#fff  
     style Gemini fill:\#334155,stroke:\#fff,stroke-width:2px,color:\#fff
+```
 
 ## **Nível 3: Diagrama de Componentes**
 
-**Descrição**: Este diagrama detalha os componentes internos do contêiner mais complexo, o **Backend API**. Ele mostra como as responsabilidades são divididas dentro do nosso serviço principal.  
+**Descrição**: Este diagrama detalha os componentes internos do contêiner mais complexo, o **Backend API**. Ele mostra como as responsabilidades são divididas dentro do nosso serviço principal.
+```mermaid
 graph TD  
     subgraph "Contêiner: Backend API (Node.js/Express)"  
         direction TB  
@@ -78,3 +84,4 @@ graph TD
     style C fill:\#334155,stroke:\#fff,stroke-width:1px,color:\#fff  
     style D fill:\#334155,stroke:\#fff,stroke-width:1px,color:\#fff  
     style E fill:\#334155,stroke:\#fff,stroke-width:1px,color:\#fff  
+```
