@@ -1,7 +1,9 @@
 import axios from 'axios';
+import { getSectionConfig } from '../config/api.js';
 
-const GEMINI_API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent';
-const GEMINI_API_KEY = 'AIzaSyBGcK7Z77a4OYKbiTyt-vxotcIVPg5L7_s'; // Configure sua chave da API
+const GEMINI_CONFIG = getSectionConfig('GEMINI');
+const GEMINI_API_URL = GEMINI_CONFIG.API_URL;
+const GEMINI_API_KEY = GEMINI_CONFIG.API_KEY;
 
 // Função auxiliar para limpar resposta JSON do Gemini
 function limparRespostaGemini(responseText) {

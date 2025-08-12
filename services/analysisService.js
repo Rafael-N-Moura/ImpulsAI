@@ -1,6 +1,8 @@
 import { parseCv } from './cvParser.js';
-import { loadVagas, loadCursos } from '../data/dataLoader.js';
+import { loadCursos } from '../data/dataLoader.js';
 import { extrairCompetencias, realizarAnalise } from './geminiClient.js';
+import { buscarVagasJSearch, extrairCompetenciasVagas } from './jsearchService.js';
+import courseIntegrationService from './courseIntegrationService.js';
 
 function extrairCompetenciasMaisComuns(vagas, cargoAlmejado, topN = 10) {
     console.log('🔍 Extraindo competências para cargo:', cargoAlmejado);
@@ -26,19 +28,39 @@ function extrairCompetenciasMaisComuns(vagas, cargoAlmejado, topN = 10) {
     return competenciasOrdenadas;
 }
 
-function sugerirCursos(pontosADesenvolver, cursos) {
-    console.log('📚 Total de cursos carregados:', cursos.length);
-    console.log('🎯 Pontos a desenvolver:', pontosADesenvolver.length);
+/**
+ * FASE 4: PRESCRIÇÃO - Integração com CourseIntegrationService
+ * Segue a metodologia definida em metodologia.md
+ */
+async function sugerirCursosIntegrado(pontosADesenvolver, cargoAlmejado) {
+    console.log('🎯 FASE 4: Iniciando Prescrição Integrada');
+    console.log('📚 Total de pontos a desenvolver:', pontosADesenvolver.length);
 
-    return pontosADesenvolver.map(ponto => {
-        const sugestoes = cursos.filter(curso =>
-            curso.competencia && curso.competencia.toLowerCase() === ponto.competencia.toLowerCase()
+    try {
+        // Usar o CourseIntegrationService para enriquecer o roadmap
+        const roadmapEnriquecido = await courseIntegrationService.generateEnrichedRoadmap(
+            pontosADesenvolver,
+            cargoAlmejado
         );
-        return {
+
+        console.log('✅ Roadmap enriquecido gerado via CourseIntegrationService');
+        console.log(`📊 Total de cursos mapeados: ${roadmapEnriquecido.metadata.total_cursos}`);
+        console.log(`🔍 Fonte dos cursos: ${roadmapEnriquecido.metadata.fonte_cursos}`);
+
+        return roadmapEnriquecido.pontos_a_desenvolver;
+
+    } catch (error) {
+        console.error('❌ Erro na integração de cursos:', error);
+        console.log('🔄 Usando fallback para sugestão de cursos...');
+
+        // Fallback para o método antigo
+        return pontosADesenvolver.map(ponto => ({
             ...ponto,
-            cursos_sugeridos: sugestoes.map(curso => ({ nome: curso.nome, url: curso.url }))
-        };
-    });
+            cursos_sugeridos: [],
+            total_cursos: 0,
+            prioridade: 50
+        }));
+    }
 }
 
 export async function gerarRoadmapCompleto(arquivoCV, cargoAlmejado) {
@@ -47,9 +69,60 @@ export async function gerarRoadmapCompleto(arquivoCV, cargoAlmejado) {
         const textoCV = await parseCv(arquivoCV);
         console.log('📄 Texto extraído do CV:', textoCV ? textoCV.substring(0, 200) + '...' : 'NULO');
 
-        console.log('📂 Carregando dados de vagas...');
-        const vagas = await loadVagas();
-        console.log('✅ Vagas carregadas:', vagas.length);
+        console.log('🔍 Buscando vagas reais via JSearch...');
+        let vagas = [];
+        let fonteDados = 'estática';
+
+        try {
+            // Usar apenas 3 vagas para economizar a cota da API
+            vagas = await buscarVagasJSearch(cargoAlmejado, 'Brazil', 3);
+            console.log('✅ Vagas do JSearch carregadas:', vagas.length);
+
+            // Verificar se as vagas são relevantes para o cargo
+            const vagasRelevantes = vagas.filter(vaga =>
+                vaga.titulo.toLowerCase().includes('developer') ||
+                vaga.titulo.toLowerCase().includes('engineer') ||
+                vaga.titulo.toLowerCase().includes('programmer') ||
+                vaga.titulo.toLowerCase().includes('analyst') ||
+                vaga.titulo.toLowerCase().includes('manager') ||
+                vaga.titulo.toLowerCase().includes('designer')
+            );
+
+            if (vagasRelevantes.length > 0) {
+                vagas = vagasRelevantes;
+                fonteDados = 'JSearch';
+                console.log(`✅ Encontradas ${vagasRelevantes.length} vagas relevantes do JSearch`);
+            } else {
+                console.log(`⚠️ Vagas do JSearch não são relevantes para ${cargoAlmejado}`);
+                vagas = [];
+            }
+        } catch (error) {
+            console.log('⚠️ Erro ao buscar vagas do JSearch, usando dados estáticos:', error.message);
+            vagas = [];
+        }
+
+        // Definir competências do mercado baseado no que foi extraído anteriormente
+        let competenciasMercado;
+        if (vagas.length > 0) {
+            // Usar competências extraídas do JSearch
+            console.log('🤖 Extraindo competências das vagas do JSearch...');
+            const analiseMercado = await extrairCompetenciasVagas(vagas);
+            console.log('✅ Análise de mercado do JSearch:', analiseMercado);
+
+            const competenciasJSearch = analiseMercado.competencias_principais || [];
+            const competenciasVagas = extrairCompetenciasMaisComuns(vagas, cargoAlmejado, 15);
+
+            // Combinar e remover duplicatas
+            competenciasMercado = [...new Set([...competenciasJSearch, ...competenciasVagas])];
+            console.log('✅ Competências do mercado (JSearch):', competenciasMercado);
+        } else {
+            // Fallback para dados estáticos
+            console.log('⚠️ Nenhuma vaga encontrada, usando dados estáticos como fallback...');
+            const { loadVagas } = await import('../data/dataLoader.js');
+            const vagasEstaticas = await loadVagas();
+            competenciasMercado = extrairCompetenciasMaisComuns(vagasEstaticas, cargoAlmejado);
+            console.log('✅ Competências do mercado (estáticas):', competenciasMercado);
+        }
 
         console.log('📂 Carregando dados de cursos...');
         const cursos = await loadCursos();
@@ -59,7 +132,6 @@ export async function gerarRoadmapCompleto(arquivoCV, cargoAlmejado) {
         const competenciasUsuario = await extrairCompetencias(textoCV);
         console.log('✅ Competências do usuário:', competenciasUsuario);
 
-        const competenciasMercado = extrairCompetenciasMaisComuns(vagas, cargoAlmejado);
         console.log('✅ Competências do mercado:', competenciasMercado);
 
         console.log('🤖 Realizando análise de lacunas...');
@@ -69,8 +141,17 @@ export async function gerarRoadmapCompleto(arquivoCV, cargoAlmejado) {
         const roadmap = {
             cargo_almejado: cargoAlmejado,
             pontos_fortes: analise.pontos_fortes,
-            pontos_a_desenvolver: sugerirCursos(analise.pontos_a_desenvolver, cursos),
-            texto_cv: textoCV // Adicionando o texto extraído do CV
+            pontos_a_desenvolver: await sugerirCursosIntegrado(analise.pontos_a_desenvolver, cargoAlmejado),
+            texto_cv: textoCV,
+            vagas_mercado: vagas.slice(0, 10), // Incluir top 10 vagas encontradas
+            total_vagas_analisadas: vagas.length,
+            fonte_dados: fonteDados,
+            // Metadados sobre cursos (Fase 4 da metodologia)
+            cursos_metadata: {
+                total_lacunas: analise.pontos_a_desenvolver.length,
+                fonte_cursos: 'integrated_service',
+                timestamp: new Date().toISOString()
+            }
         };
         console.log('✅ Roadmap gerado com texto_cv:', roadmap.texto_cv ? 'SIM' : 'NÃO');
         return roadmap;
