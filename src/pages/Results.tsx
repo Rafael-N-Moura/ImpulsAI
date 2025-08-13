@@ -7,204 +7,105 @@ import { Button } from '@/components/ui/button';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious, type CarouselApi } from '@/components/ui/carousel';
 import { ArrowLeft, Star, CheckCircle, Target, BookOpen, Search, Edit3, ChevronLeft, ChevronRight } from 'lucide-react';
 
-// Componente para card de oportunidade expansível
+// Componente para card de oportunidade simplificado
 const OpportunityCard = ({ opportunity, index }: { opportunity: any; index: number }) => {
-  const [isExpanded, setIsExpanded] = useState(false);
-
   // Função para obter cor da prioridade
   const getPriorityColor = (priority: string) => {
     switch (priority?.toLowerCase()) {
       case 'alta':
       case 'urgente':
+      case 'crítica':
+      case 'máxima':
         return 'destructive';
       case 'média':
+      case 'moderada':
       case 'importante':
+      case 'intermediária':
         return 'default';
       case 'baixa':
-      case 'recomendado':
+      case 'recomendada':
+      case 'opcional':
+      case 'secundária':
         return 'secondary';
       default:
         return 'default';
     }
   };
 
-  // Função para obter texto da prioridade
+  // Função para obter texto da prioridade (simplificada)
   const getPriorityText = (priority: string) => {
-    switch (priority?.toLowerCase()) {
-      case 'alta':
-      case 'urgente':
-        return 'Alta';
-      case 'média':
-      case 'importante':
-        return 'Média';
-      case 'baixa':
-      case 'recomendado':
-        return 'Baixa';
-      default:
-        return priority || 'Média';
+    if (!priority) return 'Média';
+
+    // Normalizar a prioridade para o formato esperado
+    const priorityLower = priority.toLowerCase();
+
+    if (['alta', 'urgente', 'crítica', 'máxima'].includes(priorityLower)) {
+      return 'Alta';
+    } else if (['média', 'moderada', 'importante', 'intermediária'].includes(priorityLower)) {
+      return 'Média';
+    } else if (['baixa', 'recomendada', 'opcional', 'secundária'].includes(priorityLower)) {
+      return 'Baixa';
     }
-  };
 
-  // Texto da análise específica para cada competência
-  const getAnalysisText = (title: string, priority: string) => {
-    const priorityText = getPriorityText(priority);
-
-    switch (title.toLowerCase()) {
-      case 'react':
-      case 'react.js':
-      case 'react.js (avançado)':
-        return `React.js é amplamente utilizado no mercado e é essencial para desenvolvimento frontend moderno. Aprofundar o conhecimento em React, incluindo hooks (useState, useEffect, useContext), context API, Redux/Recoil para gerenciamento de estado, e testes com Jest e React Testing Library aumentará significativamente sua empregabilidade e permitirá trabalhar em projetos de grande escala.`;
-
-      case 'node.js':
-      case 'node.js (avançado)':
-        return `Node.js é essencial para desenvolvimento backend e full-stack. Dominar Node.js com Express.js, criação de APIs RESTful, autenticação JWT, integração com bancos de dados (MongoDB, PostgreSQL), e arquitetura de microsserviços será crucial para vagas de backend developer e full-stack engineer.`;
-
-      case 'typescript':
-      case 'typescript (avançado)':
-        return `TypeScript está se tornando padrão na indústria de desenvolvimento. Aprender TypeScript melhorará significativamente a qualidade do código, reduzirá bugs em produção, facilitará a manutenção de projetos grandes e aumentará a aceitação em projetos empresariais e startups de tecnologia.`;
-
-      case 'python':
-      case 'python (avançado)':
-        return `Python é uma linguagem versátil e muito demandada no mercado atual. Focar em Python para web development com Django ou Flask, data science com pandas e scikit-learn, ou automação de processos abrirá portas em diversas áreas da tecnologia, desde startups até grandes corporações.`;
-
-      case 'docker':
-      case 'docker (avançado)':
-        return `Docker é fundamental para DevOps e desenvolvimento moderno. Conhecer Docker, containers, e orquestração com Kubernetes será essencial para vagas de infraestrutura, DevOps engineer, e qualquer posição que trabalhe com deployment e escalabilidade de aplicações em ambientes de produção.`;
-
-      case 'kubernetes':
-        return `Kubernetes é a ferramenta padrão para orquestração de containers em produção. Aprender Kubernetes permitirá gerenciar aplicações distribuídas, implementar auto-scaling, e trabalhar com arquiteturas de microsserviços em ambientes cloud-native, abrindo portas para posições sênior em DevOps e arquitetura de sistemas.`;
-
-      case 'vue.js':
-        return `Vue.js é um framework moderno e crescente no mercado brasileiro e internacional. Aprender Vue.js com Composition API, Vuex para gerenciamento de estado, e Vue Router para navegação será valioso para projetos frontend e full-stack, especialmente em empresas que preferem frameworks mais leves e flexíveis.`;
-
-      case 'css grid':
-      case 'css grid & flexbox':
-        return `CSS Grid e Flexbox são essenciais para layouts modernos e responsivos. Dominar essas tecnologias permitirá criar interfaces profissionais que se destacam no mercado, implementar designs complexos com facilidade, e trabalhar com sistemas de design consistentes em projetos de grande escala.`;
-
-      case 'testes automatizados':
-      case 'jest':
-      case 'cypress':
-      case 'mocha':
-        return `Testes automatizados garantem a qualidade do código e reduzem significativamente bugs em produção. Familiaridade com Jest para testes unitários, Cypress para testes E2E, e Mocha para testes de integração é altamente valorizada por empresas que priorizam qualidade e confiabilidade em seus produtos.`;
-
-      case 'ci/cd':
-      case 'integração contínua':
-      case 'entrega contínua':
-        return `CI/CD é fundamental para desenvolvimento ágil e deployment automatizado. Conhecer ferramentas como Jenkins, GitLab CI, GitHub Actions, e conceitos de DevOps automatizará o processo de desenvolvimento, reduzirá tempo de entrega, e aumentará a confiabilidade das aplicações em produção.`;
-
-      case 'microsserviços':
-      case 'arquitetura de software':
-      case 'serverless':
-        return `Conhecimento de arquiteturas modernas como microsserviços e serverless é crucial para sistemas escaláveis. Entender padrões de comunicação entre serviços, gerenciamento de estado distribuído, e arquiteturas cloud-native abrirá portas para posições de arquiteto de software e engenheiro sênior.`;
-
-      case 'aws':
-      case 'azure':
-      case 'google cloud':
-      case 'cloud computing':
-        return `Cloud Computing é essencial para o futuro do desenvolvimento. Conhecer AWS, Azure ou Google Cloud, incluindo serviços de computação, armazenamento, e banco de dados gerenciados, permitirá trabalhar com aplicações escaláveis e posicionar-se para vagas em empresas que utilizam infraestrutura cloud.`;
-
-      case 'git':
-      case 'controle de versão':
-        return `Git é fundamental para desenvolvimento colaborativo e controle de versão. Dominar Git com workflows avançados, branching strategies, e integração com plataformas como GitHub/GitLab é essencial para qualquer desenvolvedor e será sempre valorizado no mercado de trabalho.`;
-
-      default:
-        return `${title} é uma competência importante para o cargo almejado. Desenvolver habilidades em ${title} aumentará significativamente suas chances de sucesso no mercado de trabalho e permitirá se destacar em processos seletivos competitivos.`;
-    }
+    return 'Média'; // padrão
   };
 
   return (
-    <div className="border rounded-lg border-border/50 hover:bg-muted/20 transition-all duration-300">
-      {/* Header do card - sempre visível */}
-      <div
-        className="flex items-center justify-between p-3 cursor-pointer"
-        onClick={() => setIsExpanded(!isExpanded)}
-      >
+    <div className="border rounded-lg border-border/50 hover:bg-muted/20 transition-all duration-300 p-4">
+      <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
           <span className="text-foreground font-medium">{opportunity.title}</span>
         </div>
 
         <div className="flex items-center gap-2">
-          {/* Badge de prioridade próximo à seta */}
+          {/* Badge de prioridade */}
           <Badge
             variant={getPriorityColor(opportunity.priority) as any}
             className="text-xs font-semibold px-3 py-1"
           >
             {getPriorityText(opportunity.priority)}
           </Badge>
-
-          {/* Seta indicativa */}
-          <div className={`transition-transform duration-300 ${isExpanded ? 'rotate-180' : ''}`}>
-            <svg
-              className="w-5 h-5 text-muted-foreground"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M19 9l-7 7-7-7"
-              />
-            </svg>
-          </div>
         </div>
       </div>
 
-      {/* Conteúdo expansível */}
-      <div className={`overflow-hidden transition-all duration-300 ${isExpanded ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
-        }`}>
-        <div className="px-3 pb-3 space-y-4">
-          {/* Análise da competência */}
-          <div className="bg-muted/30 rounded-lg p-3">
-            <h4 className="font-medium text-sm text-foreground mb-2">
-              📊 Análise da Competência
-            </h4>
-            <p className="text-sm text-muted-foreground leading-relaxed">
-              {getAnalysisText(opportunity.title, opportunity.priority)}
-            </p>
+      {/* Cursos recomendados (se houver) */}
+      {opportunity.cursos && opportunity.cursos.length > 0 && (
+        <div className="mt-4 space-y-2">
+          <div className="flex items-center justify-between">
+            <p className="text-sm font-medium text-foreground">📚 Cursos Recomendados</p>
+            <Badge variant="outline" className="text-xs">
+              {opportunity.total_cursos || opportunity.cursos.length} cursos
+            </Badge>
           </div>
 
-          {/* Cursos recomendados */}
-          {opportunity.cursos && opportunity.cursos.length > 0 && (
-            <div className="space-y-2">
-              <div className="flex items-center justify-between">
-                <p className="text-sm font-medium text-foreground">📚 Cursos Recomendados</p>
-                <Badge variant="outline" className="text-xs">
-                  {opportunity.total_cursos || opportunity.cursos.length} cursos
-                </Badge>
+          <div className="space-y-2">
+            {opportunity.cursos.slice(0, 3).map((curso: any, i: number) => (
+              <div key={i} className="border rounded-lg p-2 hover:bg-muted/20 transition-colors">
+                <a
+                  href={curso.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-600 hover:text-blue-700 font-medium text-sm block mb-1"
+                >
+                  📚 {curso.nome}
+                </a>
+                <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                  <span>{curso.plataforma}</span>
+                  {curso.preco && <span>• {curso.preco}</span>}
+                  {curso.avaliacao && <span>• ⭐ {curso.avaliacao}</span>}
+                  {curso.duracao && <span>• ⏱️ {curso.duracao}</span>}
+                </div>
               </div>
+            ))}
 
-              <div className="space-y-2">
-                {opportunity.cursos.slice(0, 3).map((curso: any, i: number) => (
-                  <div key={i} className="border rounded-lg p-2 hover:bg-muted/20 transition-colors">
-                    <a
-                      href={curso.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-blue-600 hover:text-blue-700 font-medium text-sm block mb-1"
-                    >
-                      📚 {curso.nome}
-                    </a>
-                    <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                      <span>{curso.plataforma}</span>
-                      {curso.preco && <span>• {curso.preco}</span>}
-                      {curso.avaliacao && <span>• ⭐ {curso.avaliacao}</span>}
-                      {curso.duracao && <span>• ⏱️ {curso.duracao}</span>}
-                    </div>
-                  </div>
-                ))}
-
-                {opportunity.cursos.length > 3 && (
-                  <p className="text-xs text-muted-foreground text-center">
-                    +{opportunity.cursos.length - 3} cursos adicionais
-                  </p>
-                )}
-              </div>
-            </div>
-          )}
+            {opportunity.cursos.length > 3 && (
+              <p className="text-xs text-muted-foreground text-center">
+                +{opportunity.cursos.length - 3} cursos adicionais
+              </p>
+            )}
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };
@@ -233,26 +134,50 @@ const Results = () => {
     'Controle de Versão com Git'
   ];
 
-  const opportunities = resultado?.pontos_a_desenvolver?.map((item: any) => ({
-    title: item.competencia || item.skill,
-    priority: item.importancia || 'Importante',
-    cursos: item.cursos_sugeridos || item.cursos_disponiveis || [],
-    total_cursos: item.total_cursos || 0,
-    prioridade: item.prioridade || 50
-  })) || [
-      { title: 'Cloud Computing (AWS/Azure)', priority: 'Urgente', cursos: [] },
-      { title: 'Arquitetura de Microsserviços', priority: 'Importante', cursos: [] },
-      { title: 'Ferramentas de CI/CD (Jenkins, GitLab)', priority: 'Recomendado', cursos: [] },
-      { title: 'Containerização com Docker & Kubernetes', priority: 'Importante', cursos: [] }
-    ];
+  // Função para ordenar oportunidades por prioridade (Alta → Média → Baixa)
+  const sortByPriority = (opps: any[]) => {
+    const priorityOrder = { 'Alta': 3, 'Média': 2, 'Baixa': 1 };
+    return opps.sort((a, b) => {
+      const priorityA = priorityOrder[a.priority as keyof typeof priorityOrder] || 0;
+      const priorityB = priorityOrder[b.priority as keyof typeof priorityOrder] || 0;
+      return priorityB - priorityA; // Ordem decrescente (maior prioridade primeiro)
+    });
+  };
+
+  const opportunities = sortByPriority(
+    resultado?.pontos_a_desenvolver?.map((item: any) => ({
+      title: item.competencia || item.skill,
+      priority: item.importancia || 'Média',
+      cursos: item.cursos_sugeridos || item.cursos_disponiveis || [],
+      total_cursos: item.total_cursos || 0,
+      prioridade: item.prioridade || 50
+    })) || [
+      { title: 'Cloud Computing (AWS/Azure)', priority: 'Alta', cursos: [] },
+      { title: 'Arquitetura de Microsserviços', priority: 'Média', cursos: [] },
+      { title: 'Ferramentas de CI/CD (Jenkins, GitLab)', priority: 'Baixa', cursos: [] },
+      { title: 'Containerização com Docker & Kubernetes', priority: 'Média', cursos: [] }
+    ]
+  );
 
 
 
-  const actionPlan = opportunities.filter(o => o.cursos && o.cursos.length > 0).map(o => ({
-    title: o.title,
-    description: `Aprimore-se em ${o.title} para avançar na sua carreira de ${cargoAlmejado}.`,
-    cursos: o.cursos
-  }));
+  // Roadmap Estratégico (Fase 4 da metodologia)
+  const roadmapEstrategico = resultado?.roadmap_estrategico || [];
+
+  // Action Plan baseado no roadmap estratégico se disponível, senão fallback para oportunidades
+  const actionPlan = roadmapEstrategico.length > 0
+    ? roadmapEstrategico.map((passo: any) => ({
+      title: passo.competencia_foco,
+      description: passo.justificativa,
+      projeto: passo.projeto_sugerido,
+      cursos: passo.cursos_recomendados || [],
+      passo: passo.passo
+    }))
+    : opportunities.filter(o => o.cursos && o.cursos.length > 0).map(o => ({
+      title: o.title,
+      description: `Aprimore-se em ${o.title} para avançar na sua carreira de ${cargoAlmejado}.`,
+      cursos: o.cursos
+    }));
 
   // --- Otimização de Currículo ---
   const [sugestoes, setSugestoes] = useState<any[]>([]);
@@ -410,17 +335,15 @@ const Results = () => {
         </div>
         {/* Tabs */}
         <Tabs defaultValue="roadmap" className="w-full">
-          <TabsList className="grid w-full grid-cols-4">
+          <TabsList className="grid w-full grid-cols-2">
             <TabsTrigger value="roadmap">Roadmap</TabsTrigger>
-            <TabsTrigger value="market">Análise de Mercado</TabsTrigger>
-            <TabsTrigger value="vagas">Vagas do Mercado</TabsTrigger>
             <TabsTrigger value="cv">Otimização de Currículo</TabsTrigger>
           </TabsList>
           {/* Career Roadmap Tab */}
           <TabsContent value="roadmap" className="space-y-6">
 
             {/* Indicador de fonte dos dados */}
-            {resultado?.cursos_metadata && (
+            {/* {resultado?.cursos_metadata && (
               <div className="flex items-center justify-center">
                 <Card className="w-full max-w-2xl">
                   <CardContent className="pt-6">
@@ -444,7 +367,7 @@ const Results = () => {
                   </CardContent>
                 </Card>
               </div>
-            )}
+            )} */}
 
             <div className="w-full">
               <Carousel
@@ -455,20 +378,20 @@ const Results = () => {
                   loop: false,
                 }}
               >
-                <CarouselContent className="min-h-[500px] md:min-h-[600px]">
+                <CarouselContent className="h-[600px] md:h-[700px]">
                   {/* Card 1: Seus Pontos Fortes */}
                   <CarouselItem className="md:basis-1/1">
-                    <Card className="h-full shadow-lg hover:shadow-xl transition-all duration-300 border-green-200/50">
-                      <CardHeader>
+                    <Card className="h-full shadow-lg hover:shadow-xl transition-all duration-300 border-green-200/50 flex flex-col">
+                      <CardHeader className="flex-shrink-0">
                         <CardTitle className="text-green-400 flex items-center gap-2">
                           <CheckCircle className="h-5 w-5" />
                           Seus Pontos Fortes
                         </CardTitle>
                         <CardDescription>
-                          Competências que você já domina e pode destacar
+                          Competências que você já domina
                         </CardDescription>
                       </CardHeader>
-                      <CardContent className="space-y-3">
+                      <CardContent className="flex-1 overflow-y-auto custom-scrollbar space-y-3 pr-2">
                         {strengths.map((strength: string, index: number) => (
                           <div key={index} className="flex items-center gap-3 p-2 rounded-lg hover:bg-muted/30 transition-colors">
                             <Star className="h-4 w-4 text-green-400 fill-current flex-shrink-0" />
@@ -481,17 +404,15 @@ const Results = () => {
 
                   {/* Card 2: Oportunidades de Desenvolvimento */}
                   <CarouselItem className="md:basis-1/1">
-                    <Card className="h-full shadow-lg hover:shadow-xl transition-all duration-300 border-yellow-200/50">
-                      <CardHeader>
+                    <Card className="h-full shadow-lg hover:shadow-xl transition-all duration-300 border-yellow-200/50 flex flex-col">
+                      <CardHeader className="flex-shrink-0">
                         <CardTitle className="text-yellow-400 flex items-center gap-2">
                           <Star className="h-5 w-5" />
                           Oportunidades de Desenvolvimento
                         </CardTitle>
-                        <CardDescription>
-                          Áreas para focar e desenvolver para avançar na carreira
-                        </CardDescription>
+
                       </CardHeader>
-                      <CardContent className="space-y-4">
+                      <CardContent className="flex-1 overflow-y-auto custom-scrollbar space-y-4 pr-2">
                         {opportunities.map((opp, index) => (
                           <OpportunityCard
                             key={index}
@@ -505,77 +426,123 @@ const Results = () => {
 
                   {/* Card 3: Plano de Ação Sugerido */}
                   <CarouselItem className="md:basis-1/1">
-                    <Card className="h-full shadow-lg hover:shadow-xl transition-all duration-300 border-primary/50">
-                      <CardHeader>
+                    <Card className="h-full shadow-lg hover:shadow-xl transition-all duration-300 border-primary/50 flex flex-col">
+                      <CardHeader className="flex-shrink-0">
                         <CardTitle className="text-primary flex items-center gap-2">
                           <Target className="h-5 w-5" />
-                          Plano de Ação Sugerido
+                          {roadmapEstrategico.length > 0 ? 'Trilha de Aprendizado' : 'Plano de Ação Sugerido'}
                         </CardTitle>
                         <CardDescription>
-                          Passos concretos para implementar seu desenvolvimento
+                          {roadmapEstrategico.length > 0
+                            ? 'Roadmap estratégico passo a passo com projetos práticos e cursos recomendados'
+                            : 'Passos concretos para implementar seu desenvolvimento'
+                          }
                         </CardDescription>
                       </CardHeader>
-                      <CardContent className="space-y-6">
-                        {actionPlan.length > 0 ? actionPlan.map((plan, index) => (
-                          <div key={index} className="space-y-4 p-4 rounded-lg border-l-4 border-primary bg-primary/5 hover:bg-primary/10 transition-colors">
-                            <div className="flex items-start justify-between">
-                              <div>
-                                <h4 className="font-semibold text-foreground text-lg">{plan.title}</h4>
-                                <p className="text-sm text-muted-foreground">{plan.description}</p>
-                              </div>
-                              <Badge variant="outline" className="text-xs">
-                                {plan.cursos.length} cursos
-                              </Badge>
-                            </div>
+                      <CardContent className="flex-1 overflow-y-auto custom-scrollbar space-y-6 pr-2">
+                        {actionPlan.length > 0 ? (
+                          <div className="relative">
+                            {/* Timeline Vertical */}
+                            <div className="absolute left-6 top-0 bottom-0 w-0.5 bg-primary/30"></div>
 
-                            <div className="grid gap-3">
-                              {plan.cursos.map((curso: any, i: number) => (
-                                <div key={i} className="flex items-center justify-between p-3 rounded-lg border bg-background hover:bg-muted/30 transition-colors">
-                                  <div className="flex-1 min-w-0">
-                                    <a
-                                      href={curso.url}
-                                      target="_blank"
-                                      rel="noopener noreferrer"
-                                      className="font-medium text-foreground hover:text-primary transition-colors block truncate"
-                                    >
-                                      {curso.nome}
-                                    </a>
-                                    <div className="flex items-center gap-3 mt-1 text-xs text-muted-foreground">
-                                      <span className="flex items-center gap-1">
-                                        <BookOpen className="h-3 w-3" />
-                                        {curso.plataforma}
-                                      </span>
-                                      {curso.preco && (
-                                        <span className="text-green-600 font-medium">{curso.preco}</span>
-                                      )}
-                                      {curso.avaliacao && (
-                                        <span className="flex items-center gap-1">
-                                          ⭐ {curso.avaliacao}
-                                        </span>
-                                      )}
-                                      {curso.duracao && (
-                                        <span>⏱️ {curso.duracao}</span>
-                                      )}
-                                      {curso.fonte && (
-                                        <Badge
-                                          variant={curso.fonte === 'external_api' ? 'default' : 'secondary'}
-                                          className="text-xs"
-                                        >
-                                          {curso.fonte === 'external_api' ? '🌐 API' : '📚 Fallback'}
-                                        </Badge>
-                                      )}
+                            {actionPlan.map((plan, index) => (
+                              <div key={index} className="relative pl-16 pb-8">
+                                {/* Ícone de Passo */}
+                                <div className="absolute left-4 top-0 w-4 h-4 bg-primary rounded-full border-4 border-background shadow-lg flex items-center justify-center">
+                                  <span className="text-xs font-bold text-primary-foreground">{plan.passo || index + 1}</span>
+                                </div>
+
+                                {/* Conteúdo do Passo */}
+                                <div className="space-y-4 p-4 rounded-lg border border-primary/20 bg-primary/5 hover:bg-primary/10 transition-all duration-300">
+                                  {/* Título e Descrição */}
+                                  <div className="space-y-3">
+                                    <div className="flex items-start justify-between">
+                                      <div className="flex-1">
+                                        <h4 className="font-semibold text-foreground text-lg">{plan.title}</h4>
+                                        <p className="text-sm text-muted-foreground leading-relaxed">{plan.description}</p>
+                                      </div>
+                                      <Badge variant="outline" className="text-xs flex-shrink-0">
+                                        {plan.cursos.length} cursos
+                                      </Badge>
                                     </div>
                                   </div>
-                                  <Button asChild variant="outline" size="sm" className="ml-3 flex-shrink-0">
-                                    <a href={curso.url} target="_blank" rel="noopener noreferrer">
-                                      Acessar
-                                    </a>
-                                  </Button>
+
+                                  {/* Projeto Sugerido */}
+                                  {plan.projeto && (
+                                    <div className="bg-muted/30 rounded-lg p-3 border-l-4 border-blue-500">
+                                      <div className="flex items-center gap-2 mb-2">
+                                        <div className="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center">
+                                          <span className="text-white text-xs">⚡</span>
+                                        </div>
+                                        <h5 className="font-medium text-sm text-foreground">Projeto Sugerido</h5>
+                                      </div>
+                                      <p className="text-sm text-muted-foreground leading-relaxed">{plan.projeto}</p>
+                                    </div>
+                                  )}
+
+                                  {/* Cursos Recomendados */}
+                                  {plan.cursos.length > 0 && (
+                                    <div className="bg-muted/30 rounded-lg p-3 border-l-4 border-green-500">
+                                      <div className="flex items-center gap-2 mb-3">
+                                        <div className="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center">
+                                          <span className="text-white text-xs">📚</span>
+                                        </div>
+                                        <h5 className="font-medium text-sm text-foreground">Cursos Recomendados</h5>
+                                      </div>
+
+                                      <div className="grid gap-3">
+                                        {plan.cursos.map((curso: any, i: number) => (
+                                          <div key={i} className="flex items-center justify-between p-3 rounded-lg border bg-background hover:bg-muted/30 transition-colors">
+                                            <div className="flex-1 min-w-0">
+                                              <a
+                                                href={curso.url}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="font-medium text-foreground hover:text-primary transition-colors block truncate"
+                                              >
+                                                {curso.nome}
+                                              </a>
+                                              <div className="flex items-center gap-3 mt-1 text-xs text-muted-foreground">
+                                                <span className="flex items-center gap-1">
+                                                  <BookOpen className="h-3 w-3" />
+                                                  {curso.plataforma}
+                                                </span>
+                                                {curso.preco && (
+                                                  <span className="text-green-600 font-medium">{curso.preco}</span>
+                                                )}
+                                                {curso.avaliacao && (
+                                                  <span className="flex items-center gap-1">
+                                                    ⭐ {curso.avaliacao}
+                                                  </span>
+                                                )}
+                                                {curso.duracao && (
+                                                  <span>⏱️ {curso.duracao}</span>
+                                                )}
+                                                {curso.fonte && (
+                                                  <Badge
+                                                    variant={curso.fonte === 'external_api' ? 'default' : 'secondary'}
+                                                    className="text-xs"
+                                                  >
+                                                    {curso.fonte === 'external_api' ? '🌐 API' : '📚 Fallback'}
+                                                  </Badge>
+                                                )}
+                                              </div>
+                                            </div>
+                                            <Button asChild variant="outline" size="sm" className="ml-3 flex-shrink-0">
+                                              <a href={curso.url} target="_blank" rel="noopener noreferrer">
+                                                Acessar
+                                              </a>
+                                            </Button>
+                                          </div>
+                                        ))}
+                                      </div>
+                                    </div>
+                                  )}
                                 </div>
-                              ))}
-                            </div>
+                              </div>
+                            ))}
                           </div>
-                        )) : (
+                        ) : (
                           <div className="text-center py-8">
                             <Target className="h-12 w-12 text-muted-foreground mx-auto mb-3" />
                             <p className="text-muted-foreground">Nenhum plano de ação sugerido disponível.</p>
@@ -632,8 +599,8 @@ const Results = () => {
             </div>
           </TabsContent>
 
-          {/* LinkedIn Jobs Tab */}
-          <TabsContent value="vagas" className="space-y-4">
+          {/* LinkedIn Jobs Tab - TEMPORARIAMENTE OCULTO */}
+          {/* <TabsContent value="vagas" className="space-y-4">
             <Card>
               <CardHeader>
                 <CardTitle>Vagas do Mercado</CardTitle>
@@ -643,7 +610,7 @@ const Results = () => {
               </CardHeader>
               <CardContent>
                 {resultado.vagas_mercado && resultado.vagas_mercado.length > 0 ? (
-                  <div className="space-y-4">
+                  <div className="space-4">
                     {resultado.vagas_mercado.map((vaga, index) => (
                       <div key={index} className="border rounded-lg p-4 space-y-2">
                         <h4 className="font-semibold text-lg">{vaga.titulo}</h4>
@@ -672,7 +639,7 @@ const Results = () => {
                 )}
               </CardContent>
             </Card>
-          </TabsContent>
+          </TabsContent> */}
 
           {/* Resume Optimization Tab (agora real) */}
           <TabsContent value="cv" className="space-y-6">
@@ -867,5 +834,32 @@ const Results = () => {
     </div>
   );
 };
+
+// Estilos personalizados para scroll
+const scrollbarStyles = `
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: hsl(var(--muted-foreground) / 0.3);
+    border-radius: 3px;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--muted-foreground) / 0.5);
+  }
+`;
+
+// Adicionar estilos ao head do documento
+if (typeof document !== 'undefined') {
+  const styleElement = document.createElement('style');
+  styleElement.textContent = scrollbarStyles;
+  document.head.appendChild(styleElement);
+}
 
 export default Results;

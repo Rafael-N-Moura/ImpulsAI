@@ -70,7 +70,7 @@ async function testExternalAPIDirectly() {
         console.log('✅ Resposta da API Externa:');
         console.log('   Status:', coursesResponse.status);
         console.log('   Success:', coursesResponse.data.success);
-        console.log('   Count:', coursesResponse.data.count);
+        console.log('   Count:', coursesResponse.data.total);
         console.log('   Data:', coursesResponse.data.data ? `${coursesResponse.data.data.length} cursos` : 'N/A');
 
         if (coursesResponse.data.data && coursesResponse.data.data.length > 0) {
@@ -113,7 +113,7 @@ async function testOurEndpointSimple() {
             console.log('\n✅ Resposta do nosso endpoint:');
             console.log('   Status:', response.status);
             console.log('   Success:', response.data.success);
-            console.log('   Count:', response.data.count);
+            console.log('   Count:', response.data.total);
             console.log('   Source:', response.data.source);
             console.log('   Message:', response.data.message);
 
@@ -165,7 +165,7 @@ async function testDifferentBodies() {
 
         if (response.success) {
             console.log('   ✅ Sucesso:', response.data.success);
-            console.log('   📊 Count:', response.data.count);
+            console.log('   📊 Count:', response.data.total);
             console.log('   🔍 Source:', response.data.source);
             console.log('   💬 Message:', response.data.message);
 
@@ -173,7 +173,7 @@ async function testDifferentBodies() {
                 testCase: testCase.name,
                 success: true,
                 source: response.data.source,
-                count: response.data.count
+                count: response.data.total
             });
         } else {
             console.log('   ❌ Falha:', response.error?.message || response.error);

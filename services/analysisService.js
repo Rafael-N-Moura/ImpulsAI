@@ -1,6 +1,6 @@
 import { parseCv } from './cvParser.js';
 import { loadCursos } from '../data/dataLoader.js';
-import { extrairCompetencias, realizarAnalise } from './geminiClient.js';
+import { extrairCompetencias, realizarAnalise, gerarRoadmapEstrategico } from './geminiClient.js';
 import { buscarVagasJSearch, extrairCompetenciasVagas } from './jsearchService.js';
 import courseIntegrationService from './courseIntegrationService.js';
 
@@ -29,28 +29,68 @@ function extrairCompetenciasMaisComuns(vagas, cargoAlmejado, topN = 10) {
 }
 
 /**
- * FASE 4: PRESCRIÇÃO - Integração com CourseIntegrationService
+ * FASE 4: GERAÇÃO DE ROADMAP ESTRATÉGICO - Implementação da metodologia
  * Segue a metodologia definida em metodologia.md
  */
-async function sugerirCursosIntegrado(pontosADesenvolver, cargoAlmejado) {
-    console.log('🎯 FASE 4: Iniciando Prescrição Integrada');
+async function sugerirCursosIntegrado(pontosADesenvolver, cargoAlmejado, pontosFortes) {
+    console.log('🎯 FASE 4: Iniciando Geração de Roadmap Estratégico');
     console.log('📚 Total de pontos a desenvolver:', pontosADesenvolver.length);
 
     try {
-        // Usar o CourseIntegrationService para enriquecer o roadmap
+        // Primeiro, usar o CourseIntegrationService para obter cursos disponíveis
+        console.log('🔍 Buscando cursos disponíveis via CourseIntegrationService...');
         const roadmapEnriquecido = await courseIntegrationService.generateEnrichedRoadmap(
             pontosADesenvolver,
             cargoAlmejado
         );
 
-        console.log('✅ Roadmap enriquecido gerado via CourseIntegrationService');
+        console.log('✅ Cursos obtidos via CourseIntegrationService');
         console.log(`📊 Total de cursos mapeados: ${roadmapEnriquecido.metadata.total_cursos}`);
         console.log(`🔍 Fonte dos cursos: ${roadmapEnriquecido.metadata.fonte_cursos}`);
 
-        return roadmapEnriquecido.pontos_a_desenvolver;
+        // Preparar dados para o Gemini
+        const diagnosticoJson = {
+            pontos_fortes: pontosFortes || [],
+            pontos_a_desenvolver: roadmapEnriquecido.pontos_a_desenvolver
+        };
+
+        // Preparar cursos disponíveis para o Gemini
+        const cursosDisponiveisJson = {
+            total_cursos: roadmapEnriquecido.metadata.total_cursos,
+            categorias: roadmapEnriquecido.metadata.categorias || [],
+            cursos_por_competencia: roadmapEnriquecido.pontos_a_desenvolver.map(ponto => ({
+                competencia: ponto.competencia,
+                cursos_disponiveis: ponto.cursos_sugeridos || []
+            }))
+        };
+
+        console.log('🤖 Gerando roadmap estratégico via Gemini...');
+        console.log('📤 Dados enviados para o Gemini:');
+        console.log('   - Diagnóstico JSON:', JSON.stringify(diagnosticoJson, null, 2));
+        console.log('   - Cursos disponíveis JSON:', JSON.stringify(cursosDisponiveisJson, null, 2));
+
+        const roadmapEstrategico = await gerarRoadmapEstrategico(
+            cargoAlmejado,
+            diagnosticoJson,
+            cursosDisponiveisJson
+        );
+
+        console.log('✅ Roadmap estratégico gerado via Gemini');
+        console.log('📋 Resposta completa do Gemini:');
+        console.log('   - Estrutura da resposta:', Object.keys(roadmapEstrategico));
+        console.log('   - Roadmap array:', roadmapEstrategico.roadmap ? 'SIM' : 'NÃO');
+        console.log(`   - Total de passos no roadmap: ${roadmapEstrategico.roadmap?.length || 0}`);
+
+        if (roadmapEstrategico.roadmap && roadmapEstrategico.roadmap.length > 0) {
+            console.log('   - Primeiro passo:', JSON.stringify(roadmapEstrategico.roadmap[0], null, 2));
+            console.log('   - Último passo:', JSON.stringify(roadmapEstrategico.roadmap[roadmapEstrategico.roadmap.length - 1], null, 2));
+        }
+
+        // Retornar o roadmap estruturado do Gemini
+        return roadmapEstrategico.roadmap || [];
 
     } catch (error) {
-        console.error('❌ Erro na integração de cursos:', error);
+        console.error('❌ Erro na geração do roadmap estratégico:', error);
         console.log('🔄 Usando fallback para sugestão de cursos...');
 
         // Fallback para o método antigo
@@ -129,19 +169,57 @@ export async function gerarRoadmapCompleto(arquivoCV, cargoAlmejado) {
         console.log('✅ Cursos carregados:', cursos.length);
 
         console.log('🤖 Extraindo competências via IA...');
+        console.log('📄 Texto do CV enviado para extração:', textoCV ? textoCV.substring(0, 300) + '...' : 'NULO');
+
         const competenciasUsuario = await extrairCompetencias(textoCV);
-        console.log('✅ Competências do usuário:', competenciasUsuario);
+
+        console.log('✅ Competências do usuário extraídas pelo Gemini:');
+        console.log('   - Estrutura da resposta:', Object.keys(competenciasUsuario));
+        console.log('   - Hard skills:', JSON.stringify(competenciasUsuario.hard_skills, null, 2));
+        console.log('   - Soft skills:', JSON.stringify(competenciasUsuario.soft_skills, null, 2));
+        console.log('   - Total de hard skills:', competenciasUsuario.hard_skills?.length || 0);
+        console.log('   - Total de soft skills:', competenciasUsuario.soft_skills?.length || 0);
 
         console.log('✅ Competências do mercado:', competenciasMercado);
 
         console.log('🤖 Realizando análise de lacunas...');
+        console.log('📊 Dados enviados para o Gemini:');
+        console.log('   - Competências do usuário:', JSON.stringify(competenciasUsuario, null, 2));
+        console.log('   - Competências do mercado:', JSON.stringify(competenciasMercado, null, 2));
+        console.log('   - Cargo almejado:', cargoAlmejado);
+
         const analise = await realizarAnalise(competenciasUsuario, competenciasMercado, cargoAlmejado);
-        console.log('✅ Análise concluída');
+
+        console.log('✅ Análise do Gemini concluída');
+        console.log('📋 Resposta completa do Gemini:');
+        console.log('   - Pontos fortes:', JSON.stringify(analise.pontos_fortes, null, 2));
+        console.log('   - Pontos a desenvolver:', JSON.stringify(analise.pontos_a_desenvolver, null, 2));
+        console.log('   - Estrutura da resposta:', Object.keys(analise));
+        console.log('   - Total de pontos fortes:', analise.pontos_fortes?.length || 0);
+        console.log('   - Total de lacunas:', analise.pontos_a_desenvolver?.length || 0);
+
+        // FASE 4: Geração de Roadmap Estratégico
+        console.log('🎯 Iniciando Fase 4: Geração de Roadmap Estratégico...');
+        console.log('📊 Dados para geração do roadmap:');
+        console.log('   - Pontos a desenvolver:', JSON.stringify(analise.pontos_a_desenvolver, null, 2));
+        console.log('   - Pontos fortes:', JSON.stringify(analise.pontos_fortes, null, 2));
+        console.log('   - Cargo almejado:', cargoAlmejado);
+
+        const roadmapEstrategico = await sugerirCursosIntegrado(analise.pontos_a_desenvolver, cargoAlmejado, analise.pontos_fortes);
+
+        console.log('✅ Roadmap estratégico concluído');
+        console.log('📋 Resultado do roadmap estratégico:');
+        console.log('   - Estrutura da resposta:', Object.keys(roadmapEstrategico));
+        console.log('   - Total de passos:', roadmapEstrategico?.length || 0);
+        if (roadmapEstrategico && roadmapEstrategico.length > 0) {
+            console.log('   - Primeiro passo:', JSON.stringify(roadmapEstrategico[0], null, 2));
+        }
 
         const roadmap = {
             cargo_almejado: cargoAlmejado,
             pontos_fortes: analise.pontos_fortes,
-            pontos_a_desenvolver: await sugerirCursosIntegrado(analise.pontos_a_desenvolver, cargoAlmejado),
+            pontos_a_desenvolver: analise.pontos_a_desenvolver, // Manter análise original
+            roadmap_estrategico: roadmapEstrategico, // Novo campo com roadmap estruturado
             texto_cv: textoCV,
             vagas_mercado: vagas.slice(0, 10), // Incluir top 10 vagas encontradas
             total_vagas_analisadas: vagas.length,
@@ -154,6 +232,17 @@ export async function gerarRoadmapCompleto(arquivoCV, cargoAlmejado) {
             }
         };
         console.log('✅ Roadmap gerado com texto_cv:', roadmap.texto_cv ? 'SIM' : 'NÃO');
+        console.log('🎉 RESUMO FINAL DA ANÁLISE:');
+        console.log('   - Cargo almejado:', roadmap.cargo_almejado);
+        console.log('   - Total de pontos fortes:', roadmap.pontos_fortes?.length || 0);
+        console.log('   - Total de lacunas:', roadmap.pontos_a_desenvolver?.length || 0);
+        console.log('   - Roadmap estratégico gerado:', roadmap.roadmap_estrategico ? 'SIM' : 'NÃO');
+        console.log('   - Passos no roadmap:', roadmap.roadmap_estrategico?.length || 0);
+        console.log('   - Fonte dos dados de vagas:', roadmap.fonte_dados);
+        console.log('   - Total de vagas analisadas:', roadmap.total_vagas_analisadas);
+        console.log('   - Timestamp:', new Date().toISOString());
+        console.log('='.repeat(80));
+
         return roadmap;
     } catch (error) {
         console.error('❌ Erro em gerarRoadmapCompleto:', error);

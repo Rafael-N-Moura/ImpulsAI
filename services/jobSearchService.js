@@ -190,21 +190,46 @@ class JobSearchService {
     // Buscar cursos via API externa
     async searchCourses(query, platform = 'all', limit = 10, language = 'pt') {
         try {
+            console.log(`🔍 [DEBUG] Iniciando busca de cursos: "${query}" em "${platform}"`);
+            console.log(`🔍 [DEBUG] useExternalAPI: ${this.useExternalAPI}`);
+
             if (this.useExternalAPI) {
-                console.log(`🔍 Buscando cursos via API externa: "${query}" em "${platform}"`);
+                console.log(`🔍 [DEBUG] Tentando API externa...`);
 
-                const externalCourses = await externalAPIService.searchCourses(query, platform, limit, language);
+                try {
+                    const externalCourses = await externalAPIService.searchCourses(query, platform, limit, language);
+                    console.log(`🔍 [DEBUG] Resposta da API externa:`, JSON.stringify(externalCourses, null, 2));
 
-                if (externalCourses.success && externalCourses.data && externalCourses.data.length > 0) {
-                    console.log(`✅ ${externalCourses.data.length} cursos encontrados via API externa`);
-                    return this.formatExternalCourses(externalCourses.data);
+                    if (externalCourses.success && externalCourses.courses && externalCourses.courses.length > 0) {
+                        console.log(`✅ [DEBUG] ${externalCourses.courses.length} cursos encontrados via API externa`);
+                        const formattedCourses = this.formatExternalCourses(externalCourses.courses);
+
+                        return {
+                            success: true,
+                            data: formattedCourses,
+                            count: formattedCourses.length,
+                            source: 'external_api',
+                            message: 'Cursos obtidos via API externa',
+                            timestamp: new Date().toISOString()
+                        };
+                    } else {
+                        console.log(`⚠️ [DEBUG] API externa não retornou dados válidos:`, {
+                            success: externalCourses.success,
+                            hasData: !!externalCourses.courses,
+                            dataLength: externalCourses.courses ? externalCourses.courses.length : 0
+                        });
+                    }
+                } catch (apiError) {
+                    console.error(`❌ [DEBUG] Erro específico da API externa:`, apiError);
                 }
 
-                console.log('⚠️ API externa não retornou cursos, tentando fallback...');
+                console.log('⚠️ [DEBUG] API externa não retornou cursos, tentando fallback...');
+            } else {
+                console.log('⚠️ [DEBUG] API externa desabilitada, indo direto para fallback');
             }
 
             // Fallback para dados estáticos
-            console.log('🔄 Usando dados de fallback estáticos para cursos');
+            console.log('🔄 [DEBUG] Usando dados de fallback estáticos para cursos');
             const fallbackCourses = await this.getCoursesFallback(query, platform, limit);
 
             return {
@@ -217,10 +242,10 @@ class JobSearchService {
             };
 
         } catch (error) {
-            console.error('❌ Erro na busca de cursos:', error);
+            console.error('❌ [DEBUG] Erro geral na busca de cursos:', error);
 
             // Em caso de erro, usar fallback
-            console.log('🔄 Erro na API externa, usando fallback para cursos...');
+            console.log('🔄 [DEBUG] Erro na API externa, usando fallback para cursos...');
             const fallbackCourses = await this.getCoursesFallback(query, platform, limit);
 
             return {

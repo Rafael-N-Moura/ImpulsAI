@@ -1,0 +1,25 @@
+<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Fundo retangular com gradiente laranja-rosa-azul -->
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ff6b35;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#f7931e;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#ff6b9d;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="icon" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ff6b35;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#f7931e;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#ff6b9d;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Fundo retangular com bordas arredondadas -->
+  <rect x="2" y="2" width="28" height="28" rx="6" fill="url(#bg)"/>
+  
+  <!-- Ícone de nuvem/IA no lado esquerdo -->
+  <path d="M8 12C8 9.24 10.24 7 13 7C15.76 7 18 9.24 18 12C18 14.76 15.76 17 13 17C10.24 17 8 14.76 8 12Z" fill="white"/>
+  <path d="M13 17C15.76 17 18 14.76 18 12C18 9.24 15.76 7 13 7C10.24 7 8 9.24 8 12C8 14.76 10.24 17 13 17ZM13 9C14.66 9 16 10.34 16 12C16 13.66 14.66 15 13 15C11.34 15 10 13.66 10 12C10 10.34 11.34 9 13 9Z" fill="white"/>
+  
+  <!-- Texto "ImpulsAI" no lado direito -->
+  <text x="22" y="18" font-family="Arial, sans-serif" font-size="8" font-weight="bold" fill="white" text-anchor="end">ImpulsAI</text>
+</svg> 

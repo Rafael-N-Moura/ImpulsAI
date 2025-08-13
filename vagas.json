@@ -13,7 +13,12 @@
             "AWS",
             "PostgreSQL",
             "MongoDB",
-            "CI/CD"
+            "CI/CD",
+            "REST APIs",
+            "GraphQL",
+            "Redux",
+            "Next.js",
+            "Tailwind CSS"
         ]
     },
     {
@@ -29,7 +34,13 @@
             "AWS",
             "Microservices",
             "REST APIs",
-            "Git"
+            "Git",
+            "Redis",
+            "Elasticsearch",
+            "Apache Kafka",
+            "Maven",
+            "JUnit",
+            "Swagger"
         ]
     },
     {
@@ -45,7 +56,13 @@
             "Git",
             "REST APIs",
             "Responsive Design",
-            "UI/UX"
+            "UI/UX",
+            "Vue.js",
+            "Angular",
+            "Sass",
+            "Webpack",
+            "Jest",
+            "Storybook"
         ]
     },
     {
@@ -62,7 +79,12 @@
             "Terraform",
             "Linux",
             "Bash",
-            "Python"
+            "Python",
+            "Ansible",
+            "Prometheus",
+            "Grafana",
+            "ELK Stack",
+            "Helm"
         ]
     },
     {
@@ -78,7 +100,233 @@
             "Mobile Development",
             "UI/UX",
             "App Store",
+            "Google Play",
+            "Flutter",
+            "Dart",
+            "Firebase",
+            "Push Notifications",
+            "Mobile Testing",
+            "Performance Optimization"
+        ]
+    },
+    {
+        "cargo": "Desenvolvedor Python",
+        "empresa": "DataTech",
+        "localizacao": "Brasília, DF",
+        "competencias": [
+            "Python",
+            "Django",
+            "Flask",
+            "PostgreSQL",
+            "MongoDB",
+            "Redis",
+            "Docker",
+            "Git",
+            "AWS",
+            "Machine Learning",
+            "Pandas",
+            "NumPy",
+            "Scikit-learn",
+            "Jupyter",
+            "FastAPI"
+        ]
+    },
+    {
+        "cargo": "Desenvolvedor .NET",
+        "empresa": "Microsoft Partner",
+        "localizacao": "Salvador, BA",
+        "competencias": [
+            "C#",
+            ".NET Core",
+            "ASP.NET",
+            "SQL Server",
+            "Entity Framework",
+            "Azure",
+            "Git",
+            "Docker",
+            "REST APIs",
+            "SignalR",
+            "Blazor",
+            "Xamarin",
+            "Unit Testing",
+            "Azure DevOps",
+            "Power BI"
+        ]
+    },
+    {
+        "cargo": "Desenvolvedor PHP",
+        "empresa": "WebSolutions",
+        "localizacao": "Recife, PE",
+        "competencias": [
+            "PHP",
+            "Laravel",
+            "WordPress",
+            "MySQL",
+            "Git",
+            "Docker",
+            "AWS",
+            "REST APIs",
+            "Composer",
+            "PHPUnit",
+            "Redis",
+            "Apache",
+            "Nginx",
+            "SEO",
+            "Payment Integration"
+        ]
+    },
+    {
+        "cargo": "Desenvolvedor Go",
+        "empresa": "CloudNative",
+        "localizacao": "Florianópolis, SC",
+        "competencias": [
+            "Go",
+            "Gin",
+            "Echo",
+            "PostgreSQL",
+            "MongoDB",
+            "Docker",
+            "Kubernetes",
+            "Git",
+            "AWS",
+            "Microservices",
+            "gRPC",
+            "Protocol Buffers",
+            "Testing",
+            "Performance",
+            "Concurrency"
+        ]
+    },
+    {
+        "cargo": "Desenvolvedor Ruby",
+        "empresa": "StartupHub",
+        "localizacao": "Campinas, SP",
+        "competencias": [
+            "Ruby",
+            "Ruby on Rails",
+            "PostgreSQL",
+            "Redis",
+            "Git",
+            "Docker",
+            "AWS",
+            "REST APIs",
+            "RSpec",
+            "Capybara",
+            "Sidekiq",
+            "Elasticsearch",
+            "Heroku",
+            "Stripe",
+            "TDD"
+        ]
+    },
+    {
+        "cargo": "Desenvolvedor Rust",
+        "empresa": "PerformanceLab",
+        "localizacao": "São Paulo, SP",
+        "competencias": [
+            "Rust",
+            "Cargo",
+            "PostgreSQL",
+            "Redis",
+            "Docker",
+            "Git",
+            "AWS",
+            "WebAssembly",
+            "Actix",
+            "Rocket",
+            "Performance",
+            "Memory Safety",
+            "Concurrency",
+            "Systems Programming",
+            "Embedded Systems"
+        ]
+    },
+    {
+        "cargo": "Desenvolvedor Kotlin",
+        "empresa": "AndroidStudio",
+        "localizacao": "Rio de Janeiro, RJ",
+        "competencias": [
+            "Kotlin",
+            "Android",
+            "Jetpack Compose",
+            "MVVM",
+            "Git",
+            "Docker",
+            "AWS",
+            "Firebase",
+            "Material Design",
+            "Coroutines",
+            "Dagger Hilt",
+            "Room Database",
+            "Retrofit",
+            "Unit Testing",
+            "CI/CD"
+        ]
+    },
+    {
+        "cargo": "Desenvolvedor Swift",
+        "empresa": "iOSDev",
+        "localizacao": "São Paulo, SP",
+        "competencias": [
+            "Swift",
+            "iOS",
+            "SwiftUI",
+            "UIKit",
+            "Git",
+            "Docker",
+            "AWS",
+            "Firebase",
+            "Core Data",
+            "Combine",
+            "Alamofire",
+            "Unit Testing",
+            "App Store",
+            "Push Notifications",
+            "ARKit"
+        ]
+    },
+    {
+        "cargo": "Desenvolvedor Flutter",
+        "empresa": "CrossPlatform",
+        "localizacao": "Belo Horizonte, MG",
+        "competencias": [
+            "Flutter",
+            "Dart",
+            "Firebase",
+            "Git",
+            "Docker",
+            "AWS",
+            "State Management",
+            "Provider",
+            "Bloc",
+            "GetX",
+            "Material Design",
+            "Cupertino",
+            "Testing",
+            "App Store",
             "Google Play"
+        ]
+    },
+    {
+        "cargo": "Desenvolvedor Blockchain",
+        "empresa": "CryptoLab",
+        "localizacao": "São Paulo, SP",
+        "competencias": [
+            "Solidity",
+            "Ethereum",
+            "Web3.js",
+            "Smart Contracts",
+            "Git",
+            "Docker",
+            "AWS",
+            "Blockchain",
+            "Cryptography",
+            "DeFi",
+            "NFTs",
+            "Truffle",
+            "Hardhat",
+            "MetaMask",
+            "IPFS"
         ]
     }
 ]
