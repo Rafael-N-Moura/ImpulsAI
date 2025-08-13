@@ -72,6 +72,7 @@ class CourseIntegrationService {
             // Verificar se algum curso veio da API externa
             if (cursosParaLacuna.length > 0 && cursosParaLacuna[0].fonte === 'external_api') {
                 hasExternalCourses = true;
+                console.log(`   🌐 Curso da API externa detectado para ${lacuna.competencia || lacuna.skill}`);
             }
 
             roadmapEnriquecido.pontos_a_desenvolver.push(lacunaEnriquecida);
@@ -111,9 +112,9 @@ class CourseIntegrationService {
 
             // Tentativa 2: Cache (se disponível)
             const cachedCourses = cacheService.getCourses(query, 'all', limit, 'pt');
-            if (cachedCourses && cachedCourses.data && cachedCourses.data.length > 0) {
-                console.log(`   💾 ${cachedCourses.data.length} cursos encontrados no cache`);
-                return this.formatExternalCourses(cachedCourses.data, skill, importancia);
+            if (cachedCourses && cachedCourses.courses && cachedCourses.courses.length > 0) {
+                console.log(`   💾 ${cachedCourses.courses.length} cursos encontrados no cache`);
+                return this.formatExternalCourses(cachedCourses.courses, skill, importancia);
             }
 
             // Tentativa 3: Fallback (dados estáticos)
@@ -140,10 +141,10 @@ class CourseIntegrationService {
 
             const response = await externalAPIService.searchCourses(query, 'all', limit, 'pt');
 
-            if (response.success && response.data && response.data.length > 0) {
+            if (response.success && response.courses && response.courses.length > 0) {
                 // Atualizar fonte nos metadados
                 this.updateSourceMetadata('external');
-                return response.data;
+                return response.courses;
             }
 
             return null;
@@ -294,31 +295,54 @@ class CourseIntegrationService {
      * Formatar cursos da API externa
      */
     formatExternalCourses(externalCourses, skill, importancia) {
-        return externalCourses.map((course, index) => ({
-            id: course.id,
-            nome: course.title || course.nome,
-            instrutor: course.instructor || course.instrutor,
-            avaliacao: course.rating || course.avaliacao,
-            alunos: course.students_count || course.alunos,
-            preco: course.price || course.preco,
-            preco_original: course.original_price || course.preco_original,
-            idioma: course.language || course.idioma,
-            duracao: course.duration || course.duracao,
-            nivel: course.level || course.nivel,
-            url: course.url,
-            imagem: course.image_url || course.imagem,
-            descricao: course.description || course.descricao,
-            plataforma: course.source || course.plataforma,
-            categoria: course.category || course.categoria,
-            tags: course.tags || [],
-            relevancia: {
-                skill_alvo: skill,
-                importancia: importancia,
-                score: this.calculateRelevanceScore(course, skill, importancia)
-            },
-            fonte: 'external_api',
-            timestamp: new Date().toISOString()
-        }));
+        console.log(`   🔧 Formatando ${externalCourses.length} cursos da API externa para "${skill}"`);
+
+        return externalCourses.map((course, index) => {
+            // Log de debug para entender a estrutura dos dados
+            if (index === 0) {
+                console.log(`   📋 Estrutura do primeiro curso:`, {
+                    id: course.id,
+                    title: course.title,
+                    instructor: course.instructor,
+                    rating: course.rating,
+                    students_count: course.students_count,
+                    price: course.price,
+                    duration: course.duration,
+                    source: course.source,
+                    category: course.category,
+                    tags: course.tags
+                });
+            }
+
+            const cursoFormatado = {
+                id: course.id,
+                nome: course.title || course.nome || 'Curso sem nome',
+                instrutor: course.instructor || course.instrutor || 'Instrutor não especificado',
+                avaliacao: course.rating || course.avaliacao || 0,
+                alunos: course.students_count || course.alunos || 0,
+                preco: course.price || course.preco || 'Preço não especificado',
+                preco_original: course.original_price || course.preco_original || 'Preço não especificado',
+                idioma: course.language || course.idioma || 'Português',
+                duracao: course.duration || course.duracao || 'Duração não especificada',
+                nivel: course.level || course.nivel || 'Intermediário',
+                url: course.url || '#',
+                imagem: course.image_url || course.imagem || '',
+                descricao: course.description || course.descricao || 'Descrição não disponível',
+                plataforma: course.source || course.plataforma || 'Plataforma não especificada',
+                categoria: course.category || course.categoria || 'Desenvolvimento',
+                tags: Array.isArray(course.tags) ? course.tags : [],
+                relevancia: {
+                    skill_alvo: skill,
+                    importancia: importancia,
+                    score: this.calculateRelevanceScore(course, skill, importancia)
+                },
+                fonte: 'external_api',
+                timestamp: new Date().toISOString()
+            };
+
+            console.log(`   ✅ Curso ${index + 1} formatado: ${cursoFormatado.nome}`);
+            return cursoFormatado;
+        });
     }
 
     /**
@@ -377,46 +401,63 @@ class CourseIntegrationService {
      */
     calculateRelevanceScore(course, skill, importancia) {
         let score = 0;
+
+        // Verificar se os parâmetros são válidos
+        if (!course || !skill || !importancia) {
+            console.log(`   ⚠️ Parâmetros inválidos para calculateRelevanceScore:`, {
+                hasCourse: !!course,
+                hasSkill: !!skill,
+                hasImportancia: !!importancia
+            });
+            return 50; // Score padrão
+        }
+
         const skillLower = skill.toLowerCase();
 
-        // Score baseado na correspondência exata
-        if (course.nome.toLowerCase().includes(skillLower)) {
+        // Score baseado na correspondência exata (com verificações de segurança)
+        if (course.nome && typeof course.nome === 'string' && course.nome.toLowerCase().includes(skillLower)) {
             score += 50;
         }
-        if (course.descricao.toLowerCase().includes(skillLower)) {
+        if (course.descricao && typeof course.descricao === 'string' && course.descricao.toLowerCase().includes(skillLower)) {
             score += 30;
         }
-        if (course.tags && course.tags.some(tag => tag.toLowerCase().includes(skillLower))) {
+        if (course.tags && Array.isArray(course.tags) && course.tags.some(tag =>
+            tag && typeof tag === 'string' && tag.toLowerCase().includes(skillLower)
+        )) {
             score += 20;
         }
-        if (course.categoria && course.categoria.toLowerCase().includes(skillLower)) {
+        if (course.categoria && typeof course.categoria === 'string' && course.categoria.toLowerCase().includes(skillLower)) {
             score += 15;
         }
 
         // Bonus baseado na importância
-        switch (importancia.toLowerCase()) {
-            case 'alta':
-                score += 20;
-                break;
-            case 'média':
-                score += 10;
-                break;
-            case 'baixa':
-                score += 5;
-                break;
+        if (typeof importancia === 'string') {
+            switch (importancia.toLowerCase()) {
+                case 'alta':
+                    score += 20;
+                    break;
+                case 'média':
+                    score += 10;
+                    break;
+                case 'baixa':
+                    score += 5;
+                    break;
+                default:
+                    score += 10; // Score padrão para importância não reconhecida
+            }
         }
 
         // Bonus baseado na avaliação
-        if (course.avaliacao && course.avaliacao >= 4.5) {
+        if (course.avaliacao && typeof course.avaliacao === 'number' && course.avaliacao >= 4.5) {
             score += 15;
-        } else if (course.avaliacao && course.avaliacao >= 4.0) {
+        } else if (course.avaliacao && typeof course.avaliacao === 'number' && course.avaliacao >= 4.0) {
             score += 10;
         }
 
         // Bonus baseado no número de alunos
-        if (course.alunos && course.alunos >= 100000) {
+        if (course.alunos && typeof course.alunos === 'number' && course.alunos >= 100000) {
             score += 10;
-        } else if (course.alunos && course.alunos >= 50000) {
+        } else if (course.alunos && typeof course.alunos === 'number' && course.alunos >= 50000) {
             score += 5;
         }
 

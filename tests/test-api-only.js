@@ -82,20 +82,25 @@ async function testExternalAPIDirectly() {
                 console.log('✅ Resposta da API Externa:');
                 console.log('   Status:', coursesResponse.status);
                 console.log('   Success:', coursesResponse.data.success);
-                console.log('   Count:', coursesResponse.data.count);
-                console.log('   Data:', coursesResponse.data.data ? `${coursesResponse.data.data.length} cursos` : 'N/A');
-                console.log('   Message:', coursesResponse.data.message || 'N/A');
-                console.log('   Error:', coursesResponse.data.error || 'N/A');
+                console.log('   Count:', coursesResponse.data.total);
+                console.log('   Data:', coursesResponse.data.courses ? `${coursesResponse.data.courses.length} cursos` : 'N/A');
+                console.log('   Platform:', coursesResponse.data.platform || 'N/A');
+                console.log('   Query:', coursesResponse.data.query || 'N/A');
+                console.log('   Timestamp:', coursesResponse.data.timestamp || 'N/A');
 
-                if (coursesResponse.data.data && coursesResponse.data.data.length > 0) {
+                if (coursesResponse.data.courses && coursesResponse.data.courses.length > 0) {
                     console.log('\n📖 Primeiro curso encontrado:');
-                    const firstCourse = coursesResponse.data.data[0];
+                    const firstCourse = coursesResponse.data.courses[0];
                     console.log('   ID:', firstCourse.id);
-                    console.log('   Título:', firstCourse.title || firstCourse.nome || 'N/A');
-                    console.log('   Instrutor:', firstCourse.instructor || firstCourse.instrutor || 'N/A');
-                    console.log('   Plataforma:', firstCourse.source || firstCourse.plataforma || 'N/A');
-                    console.log('   Preço:', firstCourse.price || firstCourse.preco || 'N/A');
-                    console.log('   Avaliação:', firstCourse.rating || firstCourse.avaliacao || 'N/A');
+                    console.log('   Título:', firstCourse.title);
+                    console.log('   Instrutor:', firstCourse.instructor);
+                    console.log('   Plataforma:', firstCourse.source);
+                    console.log('   Preço:', firstCourse.price || 'Gratuito');
+                    console.log('   Avaliação:', firstCourse.rating);
+                    console.log('   Duração:', firstCourse.duration);
+                    console.log('   Nível:', firstCourse.level);
+                    console.log('   Idioma:', firstCourse.language);
+                    console.log('   Reviews:', firstCourse.num_reviews);
                 }
 
                 results.push({
@@ -103,9 +108,9 @@ async function testExternalAPIDirectly() {
                     success: true,
                     status: coursesResponse.status,
                     data: coursesResponse.data,
-                    hasData: coursesResponse.data.data && coursesResponse.data.data.length > 0,
-                    count: coursesResponse.data.count || 0,
-                    actualCount: coursesResponse.data.data ? coursesResponse.data.data.length : 0
+                    hasData: coursesResponse.data.courses && coursesResponse.data.courses.length > 0,
+                    count: coursesResponse.data.total || 0,
+                    actualCount: coursesResponse.data.courses ? coursesResponse.data.courses.length : 0
                 });
 
             } catch (error) {
@@ -145,17 +150,17 @@ async function testExternalAPIDirectly() {
 
                 console.log('✅ Resposta:');
                 console.log('   Success:', platformResponse.data.success);
-                console.log('   Count:', platformResponse.data.count);
-                console.log('   Data:', platformResponse.data.data ? `${platformResponse.data.data.length} cursos` : 'N/A');
+                console.log('   Count:', platformResponse.data.total);
+                console.log('   Data:', platformResponse.data.courses ? `${platformResponse.data.courses.length} cursos` : 'N/A');
 
                 results.push({
                     test: `Plataforma ${platform}`,
                     success: true,
                     status: platformResponse.status,
                     data: platformResponse.data,
-                    hasData: platformResponse.data.data && platformResponse.data.data.length > 0,
-                    count: platformResponse.data.count || 0,
-                    actualCount: platformResponse.data.data ? platformResponse.data.data.length : 0
+                    hasData: platformResponse.data.courses && platformResponse.data.courses.length > 0,
+                    count: platformResponse.data.total || 0,
+                    actualCount: platformResponse.data.courses ? platformResponse.data.courses.length : 0
                 });
 
             } catch (error) {
@@ -194,20 +199,20 @@ async function testExternalAPIDirectly() {
 
                 console.log('✅ Resposta:');
                 console.log('   Success:', limitResponse.data.success);
-                console.log('   Count:', limitResponse.data.count);
-                console.log('   Data:', limitResponse.data.data ? `${limitResponse.data.data.length} cursos` : 'N/A');
-                console.log('   Limite solicitado vs retornado:', `${limit} vs ${limitResponse.data.data ? limitResponse.data.data.length : 0}`);
+                console.log('   Count:', limitResponse.data.total);
+                console.log('   Data:', limitResponse.data.courses ? `${limitResponse.data.courses.length} cursos` : 'N/A');
+                console.log('   Limite solicitado vs retornado:', `${limit} vs ${limitResponse.data.courses ? limitResponse.data.courses.length : 0}`);
 
                 results.push({
                     test: `Limite ${limit}`,
                     success: true,
                     status: limitResponse.status,
                     data: limitResponse.data,
-                    hasData: limitResponse.data.data && limitResponse.data.data.length > 0,
-                    count: limitResponse.data.count || 0,
-                    actualCount: limitResponse.data.data ? limitResponse.data.data.length : 0,
+                    hasData: limitResponse.data.courses && limitResponse.data.courses.length > 0,
+                    count: limitResponse.data.total || 0,
+                    actualCount: limitResponse.data.courses ? limitResponse.data.courses.length : 0,
                     limitRequested: limit,
-                    limitRespected: limitResponse.data.data ? limitResponse.data.data.length <= limit : true
+                    limitRespected: limitResponse.data.courses ? limitResponse.data.courses.length <= limit : true
                 });
 
             } catch (error) {
@@ -264,7 +269,7 @@ async function testOurEndpointWithExternalAPI() {
             console.log('\n✅ Resposta do nosso endpoint:');
             console.log('   Status:', response.status);
             console.log('   Success:', response.data.success);
-            console.log('   Count:', response.data.count);
+            console.log('   Count:', response.data.total);
             console.log('   Source:', response.data.source);
             console.log('   Message:', response.data.message);
 
@@ -272,9 +277,9 @@ async function testOurEndpointWithExternalAPI() {
                 console.log('\n📖 Primeiro curso retornado:');
                 const firstCourse = response.data.data[0];
                 console.log('   ID:', firstCourse.id);
-                console.log('   Nome:', firstCourse.nome);
-                console.log('   Instrutor:', firstCourse.instrutor);
-                console.log('   Plataforma:', firstCourse.plataforma);
+                console.log('   Nome:', firstCourse.nome || firstCourse.title);
+                console.log('   Instrutor:', firstCourse.instrutor || firstCourse.instructor);
+                console.log('   Plataforma:', firstCourse.plataforma || firstCourse.source);
             }
 
             return [{
@@ -284,7 +289,7 @@ async function testOurEndpointWithExternalAPI() {
                 data: response.data,
                 source: response.data.source,
                 hasData: response.data.data && response.data.data.length > 0,
-                count: response.data.count || 0
+                count: response.data.total || 0
             }];
         } else {
             console.log('\n❌ Erro no nosso endpoint:');
