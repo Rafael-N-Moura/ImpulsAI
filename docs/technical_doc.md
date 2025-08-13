@@ -75,7 +75,7 @@ O ImpulsAI é destinado a profissionais que buscam ativamente uma nova colocaç�
   * **Necessidades:** Uma solução que a ajude a identificar e destacar suas habilidades relevantes para a nova área. Precisa de um roadmap de aprendizado para preencher as lacunas técnicas e se sentir mais confiante nas entrevistas.
 
 * **Persona 3:** Carlos, 45 anos, Administrador de Empresas
-  * **Contexto:** Carlos tem mais de 20 anos de experiência em gestão e está em busca de um cargo de liderança sênior. Seu desafio não é a falta de experiência, mas sim a necessidade de customizar seu vasto currículo para vagas muito específicas. Ele precisa de uma ferramenta que o ajude a focar em conquistas relevantes e a cortar o excesso de informação que pode ser irrelevante para a vaga atual. Ele é cético em relação a IA e busca uma ferramenta que seja precisa e confiável.
+  * **Contexto:** Carlos tem mais de 20 anos de experiência em gestão de empresas e está em busca de um cargo de liderança sênior. Seu desafio não é a falta de experiência, mas sim a necessidade de customizar seu vasto currículo para vagas muito específicas. Ele precisa de uma ferramenta que o ajude a focar em conquistas relevantes e a cortar o excesso de informação que pode ser irrelevante para a vaga atual. Ele é cético em relação a IA e busca uma ferramenta que seja precisa e confiável.
   * **Necessidades:** Sugestões precisas e estratégicas para otimizar seu currículo. Ele valoriza a velocidade e a relevância das sugestões, e espera que a ferramenta seja capaz de interpretar nuances em descrições de vagas de alto nível.
 
 ### 1.1. Objetivos do Projeto
@@ -374,7 +374,6 @@ Este diagrama descreve como a informação se move entre os principais component
 6.  Finalmente, o **Backend** envia os **resultados da análise** de volta para o **Frontend**, que exibe as informações para o **Usuário**.
 
 ## 3\. Detalhes Técnicos e de Implementação
-
 ### 3.1. Tecnologias e Dependências
 
 Esta seção lista as principais tecnologias, frameworks e bibliotecas utilizadas no desenvolvimento do projeto ImpulsAI.
@@ -391,73 +390,13 @@ Esta seção lista as principais tecnologias, frameworks e bibliotecas utilizada
       * `react-router-dom`: Para gerenciamento de rotas;
       * `react-icons` ou similar: Para ícones.
 
-### 3.2. Configuração e Ambiente
-
-#### 3.2.1. Pré-requisitos
-
-* Node.js: A versão 18.x ou superior constitui um pré-requisito para a operação dos componentes de backend e frontend.
-
-* npm: Fornecido com a instalação do Node.js, é empregado para a gestão das dependências do projeto.
-
-* Editor de código: Recomenda-se enfaticamente a utilização de um ambiente de desenvolvimento integrado (IDE) robusto, como o Visual Studio Code, para otimizar o fluxo de trabalho de codificação.
-
-#### 3.2.2. Instalação
-
-* **Clonagem do Repositório:** O processo é iniciado com o acesso ao terminal e a execução do comando de clonagem do repositório Git, seguido pela navegação para o diretório do projeto:
-
-```
-git clone https://github.com/seu-usuario/impulsa-ai.git
-cd impulsa-ai
-```
-
-* **Instalação das Dependências do Backend:** No diretório do backend, procede-se à instalação das dependências necessárias para o servidor:
-```
-cd backend
-npm install
-```
-
-* **Instalação das Dependências do Frontend:** Após a conclusão do passo anterior, retorne ao diretório raiz, navegue para o diretório do frontend e realize a instalação das dependências da interface:
-```
-cd ../frontend
-npm install
-```
-
-* **Configuração do Ambiente:** A configuração do ambiente requer a criação de um arquivo de configuração .env no diretório do backend e a inserção da chave da API do Gemini, conforme o formato especificado:
-```
-API_GEMINI_KEY=sua_chave_aqui
-```
-
-#### 3.2.3. Instruções de Execução do Projeto
-
-* **Inicialização do Servidor de Backend:** No diretório correspondente ao backend, execute o comando para iniciar o servidor:
-```
-cd backend
-npm start
-```
-
-O servidor estará acessível no endereço http://localhost:3001.
-
-* **Inicialização da Aplicação de Frontend:** Em uma nova instância de terminal, navegue até o diretório do frontend e execute o comando para iniciar a aplicação:
-```
-cd frontend
-npm start
-```
-
-A interface da aplicação será automaticamente carregada no endereço http://localhost:3000 no navegador padrão.
-
 ## 4\. Deploy e Operação
 
 ### 4.1. Ambiente de Produção
 #### 4.1.1. Infraestrutura
-
-* **Plataforma de Hospedagem:**
-
-* **Servidor Web:**
-
 * **Ferramentas de CI/CD:** Não se aplica na versão atual. O deploy é realizado manualmente.
 
 #### 4.1.2. Passos do Deploy
-O processo de deploy para a arquitetura monolítica é realizado de forma manual, seguindo os passos abaixo:
 
 **1. Build do Frontend:** Na pasta do frontend, execute o comando para gerar a versão otimizada da aplicação.
 ```
