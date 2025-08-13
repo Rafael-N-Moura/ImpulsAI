@@ -77,4 +77,5 @@ Para configurar e rodar o projeto localmente, siga os pré-requisitos e os passo
 ---
 * [Pitch]()
 * [Relatório Final]()
-* [Documentação Técnica]()
+* [Documentação Técnica](docs/technical_doc.md)
+* API externa: https://github.com/melg88/api-jobs-courses-impulseAI/blob/main/docs/API_CONSUMER_GUIDE.md
