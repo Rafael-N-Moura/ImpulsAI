@@ -76,5 +76,707 @@
         "plataforma": "Coursera",
         "url": "https://www.coursera.org/learn/api-design",
         "competencia": "REST APIs"
+    },
+    {
+        "nome": "GraphQL with React",
+        "plataforma": "Udemy",
+        "url": "https://www.udemy.com/course/graphql-with-react-course/",
+        "competencia": "GraphQL"
+    },
+    {
+        "nome": "Redux Toolkit Tutorial",
+        "plataforma": "YouTube",
+        "url": "https://www.youtube.com/watch?v=9P2sJ9qXjqE",
+        "competencia": "Redux"
+    },
+    {
+        "nome": "Next.js 13 Full Course",
+        "plataforma": "YouTube",
+        "url": "https://www.youtube.com/watch?v=1WmNXEVia8I",
+        "competencia": "Next.js"
+    },
+    {
+        "nome": "Tailwind CSS From Scratch",
+        "plataforma": "Udemy",
+        "url": "https://www.udemy.com/course/tailwind-css-from-scratch/",
+        "competencia": "Tailwind CSS"
+    },
+    {
+        "nome": "Java Programming Masterclass",
+        "plataforma": "Udemy",
+        "url": "https://www.udemy.com/course/java-the-complete-java-developer-course/",
+        "competencia": "Java"
+    },
+    {
+        "nome": "Spring Boot Tutorial",
+        "plataforma": "YouTube",
+        "url": "https://www.youtube.com/watch?v=9SGDpanrc8U",
+        "competencia": "Spring Boot"
+    },
+    {
+        "nome": "Redis Tutorial for Beginners",
+        "plataforma": "YouTube",
+        "url": "https://www.youtube.com/watch?v=HlH2HqtN7jo",
+        "competencia": "Redis"
+    },
+    {
+        "nome": "Elasticsearch Tutorial",
+        "plataforma": "YouTube",
+        "url": "https://www.youtube.com/watch?v=9CO9_M2odpQ",
+        "competencia": "Elasticsearch"
+    },
+    {
+        "nome": "Apache Kafka Tutorial",
+        "plataforma": "YouTube",
+        "url": "https://www.youtube.com/watch?v=R873BlNVUB4",
+        "competencia": "Apache Kafka"
+    },
+    {
+        "nome": "Maven Tutorial",
+        "plataforma": "YouTube",
+        "url": "https://www.youtube.com/watch?v=al7bQUWmKf4",
+        "competencia": "Maven"
+    },
+    {
+        "nome": "JUnit 5 Tutorial",
+        "plataforma": "YouTube",
+        "url": "https://www.youtube.com/watch?v=vZm0lHciFsQ",
+        "competencia": "JUnit"
+    },
+    {
+        "nome": "Swagger API Documentation",
+        "plataforma": "YouTube",
+        "url": "https://www.youtube.com/watch?v=HX3i0F4vWpk",
+        "competencia": "Swagger"
+    },
+    {
+        "nome": "Vue.js 3 Tutorial",
+        "plataforma": "YouTube",
+        "url": "https://www.youtube.com/watch?v=YrxBCBibVo0",
+        "competencia": "Vue.js"
+    },
+    {
+        "nome": "Angular Tutorial for Beginners",
+        "plataforma": "YouTube",
+        "url": "https://www.youtube.com/watch?v=3dHNOWTI7H8",
+        "competencia": "Angular"
+    },
+    {
+        "nome": "Sass Tutorial",
+        "plataforma": "YouTube",
+        "url": "https://www.youtube.com/watch?v=akDIJa0AP5c",
+        "competencia": "Sass"
+    },
+    {
+        "nome": "Webpack Tutorial",
+        "plataforma": "YouTube",
+        "url": "https://www.youtube.com/watch?v=GU-2T7k9NfI",
+        "competencia": "Webpack"
+    },
+    {
+        "nome": "Jest Testing Tutorial",
+        "plataforma": "YouTube",
+        "url": "https://www.youtube.com/watch?v=7rTTxJ5-5uQ",
+        "competencia": "Jest"
+    },
+    {
+        "nome": "Storybook Tutorial",
+        "plataforma": "YouTube",
+        "url": "https://www.youtube.com/watch?v=BySFuXgG-ow",
+        "competencia": "Storybook"
+    },
+    {
+        "nome": "Ansible Tutorial",
+        "plataforma": "YouTube",
+        "url": "https://www.youtube.com/watch?v=5hycyr-8EKs",
+        "competencia": "Ansible"
+    },
+    {
+        "nome": "Prometheus Tutorial",
+        "plataforma": "YouTube",
+        "url": "https://www.youtube.com/watch?v=5oeeJtFrlqY",
+        "competencia": "Prometheus"
+    },
+    {
+        "nome": "Grafana Tutorial",
+        "plataforma": "YouTube",
+        "url": "https://www.youtube.com/watch?v=eyJrqr4I6cw",
+        "competencia": "Grafana"
+    },
+    {
+        "nome": "ELK Stack Tutorial",
+        "plataforma": "YouTube",
+        "url": "https://www.youtube.com/watch?v=4X0WLgQAt6Q",
+        "competencia": "ELK Stack"
+    },
+    {
+        "nome": "Helm Tutorial",
+        "plataforma": "YouTube",
+        "url": "https://www.youtube.com/watch?v=9cwqnNlt490",
+        "competencia": "Helm"
+    },
+    {
+        "nome": "Flutter Tutorial for Beginners",
+        "plataforma": "YouTube",
+        "url": "https://www.youtube.com/watch?v=1ukSR1GRtMU",
+        "competencia": "Flutter"
+    },
+    {
+        "nome": "Dart Programming Tutorial",
+        "plataforma": "YouTube",
+        "url": "https://www.youtube.com/watch?v=Ej_PcrXYuCw",
+        "competencia": "Dart"
+    },
+    {
+        "nome": "Firebase Tutorial",
+        "plataforma": "YouTube",
+        "url": "https://www.youtube.com/watch?v=9kRgVxULbag",
+        "competencia": "Firebase"
+    },
+    {
+        "nome": "Python for Everybody",
+        "plataforma": "Coursera",
+        "url": "https://www.coursera.org/specializations/python",
+        "competencia": "Python"
+    },
+    {
+        "nome": "Django Tutorial",
+        "plataforma": "YouTube",
+        "url": "https://www.youtube.com/watch?v=UmljXZIypDc",
+        "competencia": "Django"
+    },
+    {
+        "nome": "Flask Tutorial",
+        "plataforma": "YouTube",
+        "url": "https://www.youtube.com/watch?v=oA8brF3w5Xk",
+        "competencia": "Flask"
+    },
+    {
+        "nome": "Machine Learning with Python",
+        "plataforma": "Coursera",
+        "url": "https://www.coursera.org/learn/machine-learning",
+        "competencia": "Machine Learning"
+    },
+    {
+        "nome": "Pandas Tutorial",
+        "plataforma": "YouTube",
+        "url": "https://www.youtube.com/watch?v=dcqPhpY7tWk",
+        "competencia": "Pandas"
+    },
+    {
+        "nome": "NumPy Tutorial",
+        "plataforma": "YouTube",
+        "url": "https://www.youtube.com/watch?v=QUT1VHiLmIY",
+        "competencia": "NumPy"
+    },
+    {
+        "nome": "Scikit-learn Tutorial",
+        "plataforma": "YouTube",
+        "url": "https://www.youtube.com/watch?v=rvVkVsG49uU",
+        "competencia": "Scikit-learn"
+    },
+    {
+        "nome": "Jupyter Notebook Tutorial",
+        "plataforma": "YouTube",
+        "url": "https://www.youtube.com/watch?v=HW29067qVWk",
+        "competencia": "Jupyter"
+    },
+    {
+        "nome": "FastAPI Tutorial",
+        "plataforma": "YouTube",
+        "url": "https://www.youtube.com/watch?v=0UOvMu7UcDc",
+        "competencia": "FastAPI"
+    },
+    {
+        "nome": "C# Tutorial for Beginners",
+        "plataforma": "YouTube",
+        "url": "https://www.youtube.com/watch?v=gfkTfcpWqAY",
+        "competencia": "C#"
+    },
+    {
+        "nome": ".NET Core Tutorial",
+        "plataforma": "YouTube",
+        "url": "https://www.youtube.com/watch?v=CqEj6jOUegU",
+        "competencia": ".NET Core"
+    },
+    {
+        "nome": "ASP.NET Core Tutorial",
+        "plataforma": "YouTube",
+        "url": "https://www.youtube.com/watch?v=9zJn3a7L1uE",
+        "competencia": "ASP.NET"
+    },
+    {
+        "nome": "SQL Server Tutorial",
+        "plataforma": "YouTube",
+        "url": "https://www.youtube.com/watch?v=9Pzj7Aj25Vo",
+        "competencia": "SQL Server"
+    },
+    {
+        "nome": "Entity Framework Tutorial",
+        "plataforma": "YouTube",
+        "url": "https://www.youtube.com/watch?v=O2g1ZZvDXcg",
+        "competencia": "Entity Framework"
+    },
+    {
+        "nome": "Azure Tutorial for Beginners",
+        "plataforma": "YouTube",
+        "url": "https://www.youtube.com/watch?v=NuYDAs3kNV8",
+        "competencia": "Azure"
+    },
+    {
+        "nome": "SignalR Tutorial",
+        "plataforma": "YouTube",
+        "url": "https://www.youtube.com/watch?v=3iMKOALNqVs",
+        "competencia": "SignalR"
+    },
+    {
+        "nome": "Blazor Tutorial",
+        "plataforma": "YouTube",
+        "url": "https://www.youtube.com/watch?v=4G_BzLxa9Nw",
+        "competencia": "Blazor"
+    },
+    {
+        "nome": "Xamarin Tutorial",
+        "plataforma": "YouTube",
+        "url": "https://www.youtube.com/watch?v=6ZpJjJtQrYc",
+        "competencia": "Xamarin"
+    },
+    {
+        "nome": "Unit Testing in C#",
+        "plataforma": "YouTube",
+        "url": "https://www.youtube.com/watch?v=HYrXogLj7vg",
+        "competencia": "Unit Testing"
+    },
+    {
+        "nome": "Azure DevOps Tutorial",
+        "plataforma": "YouTube",
+        "url": "https://www.youtube.com/watch?v=NuYDAs3kNV8",
+        "competencia": "Azure DevOps"
+    },
+    {
+        "nome": "Power BI Tutorial",
+        "plataforma": "YouTube",
+        "url": "https://www.youtube.com/watch?v=AGrl-H87pRU",
+        "competencia": "Power BI"
+    },
+    {
+        "nome": "PHP Tutorial for Beginners",
+        "plataforma": "YouTube",
+        "url": "https://www.youtube.com/watch?v=OK_JCtrrv-c",
+        "competencia": "PHP"
+    },
+    {
+        "nome": "Laravel Tutorial",
+        "plataforma": "YouTube",
+        "url": "https://www.youtube.com/watch?v=ImtZ5yENzgE",
+        "competencia": "Laravel"
+    },
+    {
+        "nome": "WordPress Tutorial",
+        "plataforma": "YouTube",
+        "url": "https://www.youtube.com/watch?v=71EZb94AS1k",
+        "competencia": "WordPress"
+    },
+    {
+        "nome": "MySQL Tutorial",
+        "plataforma": "YouTube",
+        "url": "https://www.youtube.com/watch?v=7S_tz1z_5bA",
+        "competencia": "MySQL"
+    },
+    {
+        "nome": "Composer Tutorial",
+        "plataforma": "YouTube",
+        "url": "https://www.youtube.com/watch?v=0DpD_8m80sI",
+        "competencia": "Composer"
+    },
+    {
+        "nome": "PHPUnit Testing",
+        "plataforma": "YouTube",
+        "url": "https://www.youtube.com/watch?v=0DpD_8m80sI",
+        "competencia": "PHPUnit"
+    },
+    {
+        "nome": "Apache Tutorial",
+        "plataforma": "YouTube",
+        "url": "https://www.youtube.com/watch?v=0DpD_8m80sI",
+        "competencia": "Apache"
+    },
+    {
+        "nome": "Nginx Tutorial",
+        "plataforma": "YouTube",
+        "url": "https://www.youtube.com/watch?v=0DpD_8m80sI",
+        "competencia": "Nginx"
+    },
+    {
+        "nome": "SEO Tutorial",
+        "plataforma": "YouTube",
+        "url": "https://www.youtube.com/watch?v=0DpD_8m80sI",
+        "competencia": "SEO"
+    },
+    {
+        "nome": "Payment Integration Tutorial",
+        "plataforma": "YouTube",
+        "url": "https://www.youtube.com/watch?v=0DpD_8m80sI",
+        "competencia": "Payment Integration"
+    },
+    {
+        "nome": "Go Programming Tutorial",
+        "plataforma": "YouTube",
+        "url": "https://www.youtube.com/watch?v=YS4e4q9XBaA",
+        "competencia": "Go"
+    },
+    {
+        "nome": "Gin Framework Tutorial",
+        "plataforma": "YouTube",
+        "url": "https://www.youtube.com/watch?v=0DpD_8m80sI",
+        "competencia": "Gin"
+    },
+    {
+        "nome": "Echo Framework Tutorial",
+        "plataforma": "YouTube",
+        "url": "https://www.youtube.com/watch?v=0DpD_8m80sI",
+        "competencia": "Echo"
+    },
+    {
+        "nome": "gRPC Tutorial",
+        "plataforma": "YouTube",
+        "url": "https://www.youtube.com/watch?v=0DpD_8m80sI",
+        "competencia": "gRPC"
+    },
+    {
+        "nome": "Protocol Buffers Tutorial",
+        "plataforma": "YouTube",
+        "url": "https://www.youtube.com/watch?v=0DpD_8m80sI",
+        "competencia": "Protocol Buffers"
+    },
+    {
+        "nome": "Ruby Tutorial",
+        "plataforma": "YouTube",
+        "url": "https://www.youtube.com/watch?v=t_ispmWmdjY",
+        "competencia": "Ruby"
+    },
+    {
+        "nome": "Ruby on Rails Tutorial",
+        "plataforma": "YouTube",
+        "url": "https://www.youtube.com/watch?v=fmyvWz5TUWg",
+        "competencia": "Ruby on Rails"
+    },
+    {
+        "nome": "RSpec Testing Tutorial",
+        "plataforma": "YouTube",
+        "url": "https://www.youtube.com/watch?v=0DpD_8m80sI",
+        "competencia": "RSpec"
+    },
+    {
+        "nome": "Capybara Testing Tutorial",
+        "plataforma": "YouTube",
+        "url": "https://www.youtube.com/watch?v=0DpD_8m80sI",
+        "competencia": "Capybara"
+    },
+    {
+        "nome": "Sidekiq Tutorial",
+        "plataforma": "YouTube",
+        "url": "https://www.youtube.com/watch?v=0DpD_8m80sI",
+        "competencia": "Sidekiq"
+    },
+    {
+        "nome": "Heroku Tutorial",
+        "plataforma": "YouTube",
+        "url": "https://www.youtube.com/watch?v=0DpD_8m80sI",
+        "competencia": "Heroku"
+    },
+    {
+        "nome": "Stripe Integration Tutorial",
+        "plataforma": "YouTube",
+        "url": "https://www.youtube.com/watch?v=0DpD_8m80sI",
+        "competencia": "Stripe"
+    },
+    {
+        "nome": "TDD Tutorial",
+        "plataforma": "YouTube",
+        "url": "https://www.youtube.com/watch?v=0DpD_8m80sI",
+        "competencia": "TDD"
+    },
+    {
+        "nome": "Rust Programming Tutorial",
+        "plataforma": "YouTube",
+        "url": "https://www.youtube.com/watch?v=zF34dRivLOw",
+        "competencia": "Rust"
+    },
+    {
+        "nome": "Cargo Tutorial",
+        "plataforma": "YouTube",
+        "url": "https://www.youtube.com/watch?v=0DpD_8m80sI",
+        "competencia": "Cargo"
+    },
+    {
+        "nome": "WebAssembly Tutorial",
+        "plataforma": "YouTube",
+        "url": "https://www.youtube.com/watch?v=0DpD_8m80sI",
+        "competencia": "WebAssembly"
+    },
+    {
+        "nome": "Actix Web Tutorial",
+        "plataforma": "YouTube",
+        "url": "https://www.youtube.com/watch?v=0DpD_8m80sI",
+        "competencia": "Actix"
+    },
+    {
+        "nome": "Rocket Framework Tutorial",
+        "plataforma": "YouTube",
+        "url": "https://www.youtube.com/watch?v=0DpD_8m80sI",
+        "competencia": "Rocket"
+    },
+    {
+        "nome": "Performance Optimization Tutorial",
+        "plataforma": "YouTube",
+        "url": "https://www.youtube.com/watch?v=0DpD_8m80sI",
+        "competencia": "Performance"
+    },
+    {
+        "nome": "Memory Safety Tutorial",
+        "plataforma": "YouTube",
+        "url": "https://www.youtube.com/watch?v=0DpD_8m80sI",
+        "competencia": "Memory Safety"
+    },
+    {
+        "nome": "Concurrency Tutorial",
+        "plataforma": "YouTube",
+        "url": "https://www.youtube.com/watch?v=0DpD_8m80sI",
+        "competencia": "Concurrency"
+    },
+    {
+        "nome": "Systems Programming Tutorial",
+        "plataforma": "YouTube",
+        "url": "https://www.youtube.com/watch?v=0DpD_8m80sI",
+        "competencia": "Systems Programming"
+    },
+    {
+        "nome": "Embedded Systems Tutorial",
+        "plataforma": "YouTube",
+        "url": "https://www.youtube.com/watch?v=0DpD_8m80sI",
+        "competencia": "Embedded Systems"
+    },
+    {
+        "nome": "Kotlin Tutorial for Beginners",
+        "plataforma": "YouTube",
+        "url": "https://www.youtube.com/watch?v=H_oGi8uuDpA",
+        "competencia": "Kotlin"
+    },
+    {
+        "nome": "Android Development Tutorial",
+        "plataforma": "YouTube",
+        "url": "https://www.youtube.com/watch?v=fis26H63D3o",
+        "competencia": "Android"
+    },
+    {
+        "nome": "Jetpack Compose Tutorial",
+        "plataforma": "YouTube",
+        "url": "https://www.youtube.com/watch?v=0DpD_8m80sI",
+        "competencia": "Jetpack Compose"
+    },
+    {
+        "nome": "MVVM Architecture Tutorial",
+        "plataforma": "YouTube",
+        "url": "https://www.youtube.com/watch?v=0DpD_8m80sI",
+        "competencia": "MVVM"
+    },
+    {
+        "nome": "Material Design Tutorial",
+        "plataforma": "YouTube",
+        "url": "https://www.youtube.com/watch?v=0DpD_8m80sI",
+        "competencia": "Material Design"
+    },
+    {
+        "nome": "Coroutines Tutorial",
+        "plataforma": "YouTube",
+        "url": "https://www.youtube.com/watch?v=0DpD_8m80sI",
+        "competencia": "Coroutines"
+    },
+    {
+        "nome": "Dagger Hilt Tutorial",
+        "plataforma": "YouTube",
+        "url": "https://www.youtube.com/watch?v=0DpD_8m80sI",
+        "competencia": "Dagger Hilt"
+    },
+    {
+        "nome": "Room Database Tutorial",
+        "plataforma": "YouTube",
+        "url": "https://www.youtube.com/watch?v=0DpD_8m80sI",
+        "competencia": "Room Database"
+    },
+    {
+        "nome": "Retrofit Tutorial",
+        "plataforma": "YouTube",
+        "url": "https://www.youtube.com/watch?v=0DpD_8m80sI",
+        "competencia": "Retrofit"
+    },
+    {
+        "nome": "Swift Tutorial for Beginners",
+        "plataforma": "YouTube",
+        "url": "https://www.youtube.com/watch?v=comQY-q9XqE",
+        "competencia": "Swift"
+    },
+    {
+        "nome": "iOS Development Tutorial",
+        "plataforma": "YouTube",
+        "url": "https://www.youtube.com/watch?v=0DpD_8m80sI",
+        "competencia": "iOS"
+    },
+    {
+        "nome": "SwiftUI Tutorial",
+        "plataforma": "YouTube",
+        "url": "https://www.youtube.com/watch?v=0DpD_8m80sI",
+        "competencia": "SwiftUI"
+    },
+    {
+        "nome": "UIKit Tutorial",
+        "plataforma": "YouTube",
+        "url": "https://www.youtube.com/watch?v=0DpD_8m80sI",
+        "competencia": "UIKit"
+    },
+    {
+        "nome": "Core Data Tutorial",
+        "plataforma": "YouTube",
+        "url": "https://www.youtube.com/watch?v=0DpD_8m80sI",
+        "competencia": "Core Data"
+    },
+    {
+        "nome": "Combine Framework Tutorial",
+        "plataforma": "YouTube",
+        "url": "https://www.youtube.com/watch?v=0DpD_8m80sI",
+        "competencia": "Combine"
+    },
+    {
+        "nome": "Alamofire Tutorial",
+        "plataforma": "YouTube",
+        "url": "https://www.youtube.com/watch?v=0DpD_8m80sI",
+        "competencia": "Alamofire"
+    },
+    {
+        "nome": "Push Notifications Tutorial",
+        "plataforma": "YouTube",
+        "url": "https://www.youtube.com/watch?v=0DpD_8m80sI",
+        "competencia": "Push Notifications"
+    },
+    {
+        "nome": "ARKit Tutorial",
+        "plataforma": "YouTube",
+        "url": "https://www.youtube.com/watch?v=0DpD_8m80sI",
+        "competencia": "ARKit"
+    },
+    {
+        "nome": "State Management Tutorial",
+        "plataforma": "YouTube",
+        "url": "https://www.youtube.com/watch?v=0DpD_8m80sI",
+        "competencia": "State Management"
+    },
+    {
+        "nome": "Provider Pattern Tutorial",
+        "plataforma": "YouTube",
+        "url": "https://www.youtube.com/watch?v=0DpD_8m80sI",
+        "competencia": "Provider"
+    },
+    {
+        "nome": "Bloc Pattern Tutorial",
+        "plataforma": "YouTube",
+        "url": "https://www.youtube.com/watch?v=0DpD_8m80sI",
+        "competencia": "Bloc"
+    },
+    {
+        "nome": "GetX Tutorial",
+        "plataforma": "YouTube",
+        "url": "https://www.youtube.com/watch?v=0DpD_8m80sI",
+        "competencia": "GetX"
+    },
+    {
+        "nome": "Cupertino Design Tutorial",
+        "plataforma": "YouTube",
+        "url": "https://www.youtube.com/watch?v=0DpD_8m80sI",
+        "competencia": "Cupertino"
+    },
+    {
+        "nome": "Mobile Testing Tutorial",
+        "plataforma": "YouTube",
+        "url": "https://www.youtube.com/watch?v=0DpD_8m80sI",
+        "competencia": "Mobile Testing"
+    },
+    {
+        "nome": "Performance Optimization Tutorial",
+        "plataforma": "YouTube",
+        "url": "https://www.youtube.com/watch?v=0DpD_8m80sI",
+        "competencia": "Performance Optimization"
+    },
+    {
+        "nome": "Solidity Tutorial",
+        "plataforma": "YouTube",
+        "url": "https://www.youtube.com/watch?v=ipwxYa-F1uY",
+        "competencia": "Solidity"
+    },
+    {
+        "nome": "Ethereum Development Tutorial",
+        "plataforma": "YouTube",
+        "url": "https://www.youtube.com/watch?v=0DpD_8m80sI",
+        "competencia": "Ethereum"
+    },
+    {
+        "nome": "Web3.js Tutorial",
+        "plataforma": "YouTube",
+        "url": "https://www.youtube.com/watch?v=0DpD_8m80sI",
+        "competencia": "Web3.js"
+    },
+    {
+        "nome": "Smart Contracts Tutorial",
+        "plataforma": "YouTube",
+        "url": "https://www.youtube.com/watch?v=0DpD_8m80sI",
+        "competencia": "Smart Contracts"
+    },
+    {
+        "nome": "Blockchain Tutorial",
+        "plataforma": "YouTube",
+        "url": "https://www.youtube.com/watch?v=0DpD_8m80sI",
+        "competencia": "Blockchain"
+    },
+    {
+        "nome": "Cryptography Tutorial",
+        "plataforma": "YouTube",
+        "url": "https://www.youtube.com/watch?v=0DpD_8m80sI",
+        "competencia": "Cryptography"
+    },
+    {
+        "nome": "DeFi Tutorial",
+        "plataforma": "YouTube",
+        "url": "https://www.youtube.com/watch?v=0DpD_8m80sI",
+        "competencia": "DeFi"
+    },
+    {
+        "nome": "NFTs Tutorial",
+        "plataforma": "YouTube",
+        "url": "https://www.youtube.com/watch?v=0DpD_8m80sI",
+        "competencia": "NFTs"
+    },
+    {
+        "nome": "Truffle Framework Tutorial",
+        "plataforma": "YouTube",
+        "url": "https://www.youtube.com/watch?v=0DpD_8m80sI",
+        "competencia": "Truffle"
+    },
+    {
+        "nome": "Hardhat Tutorial",
+        "plataforma": "YouTube",
+        "url": "https://www.youtube.com/watch?v=0DpD_8m80sI",
+        "competencia": "Hardhat"
+    },
+    {
+        "nome": "MetaMask Tutorial",
+        "plataforma": "YouTube",
+        "url": "https://www.youtube.com/watch?v=0DpD_8m80sI",
+        "competencia": "MetaMask"
+    },
+    {
+        "nome": "IPFS Tutorial",
+        "plataforma": "YouTube",
+        "url": "https://www.youtube.com/watch?v=0DpD_8m80sI",
+        "competencia": "IPFS"
     }
 ]
