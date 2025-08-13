@@ -296,7 +296,7 @@ Os cenários abaixo são exemplos detalhados de testes, escritos em Gherkin.
 
 ### 2.1. Visão Arquitetural
 
-A arquitetura do ImpulsAI, em sua versão atual, adota um padrão monolítico. Esta abordagem concentra todas as funcionalidades do sistema em uma única aplicação, o que simplifica o desenvolvimento e a implantação inicial. O projeto é estruturado em torno de um servidor Express.js central, que hospeda todos os endpoints da API, e um conjunto de serviços modulares que coexistem no mesmo processo.
+A arquitetura do ImpulsAI, em sua versão atual, adota um padrão Cliente-Serviço com back-end desacoplado. Esta abordagem concentra a maioria das funcionalidades do sistema em uma única aplicação, o que simplifica o desenvolvimento e a implantação inicial. A aplicação consome dados de uma API externa para web-scrapping e retorna como resultado da análise. O projeto é estruturado em torno de um servidor Express.js central, que hospeda todos os endpoints da API, e um conjunto de serviços modulares que coexistem no mesmo processo.
 
 A aplicação front-end, construída em React, está integrada e se comunica diretamente com o backend via requisições HTTP. Para persistência de dados de forma simplificada, o sistema utiliza arquivos JSON estáticos para armazenar informações como vagas de emprego e cursos.
 
