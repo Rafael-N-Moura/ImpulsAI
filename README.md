@@ -72,3 +72,9 @@ O _ImpulsAI_ é um projeto de código aberto e colaborativo. **Contribuições s
 ### Como Buildar
 ---
 Para configurar e rodar o projeto localmente, siga os pré-requisitos e os passos de instalação detalhados no [arquivo de build](docs/build.md). O processo envolve a clonagem do repositório, a instalação das dependências do backend e do frontend, e a inicialização dos dois servidores em terminais separados.
+
+### Links Úteis
+---
+* [Pitch]()
+* [Relatório Final]()
+* [Documentação Técnica]()
