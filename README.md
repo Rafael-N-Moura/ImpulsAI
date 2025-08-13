@@ -77,5 +77,8 @@ Para configurar e rodar o projeto localmente, siga os pré-requisitos e os passo
 ---
 * [Pitch](): https://docs.google.com/presentation/d/1phDWPOVSU1KECS024X2yv7FsJcmgeZDKwAhK-1YP96k/edit?usp=sharing
 * [Relatório Final](): https://docs.google.com/document/d/1lUiZjpNS5G4i2UkEL7y0fX70t2_k2-4sXENNvUUlH0E/edit?usp=sharing
-* [Documentação Técnica](docs/technical_doc.md)
+* [Documentação Técnica Completa](docs/technical_doc.md)
+* [Artefatos AIDesign](docs/ai_design_artifacts/)
+* [Diagramas C4](docs/diagrams/)
+* [Prompting](docs/prompt_engineering/)
 * API externa: https://github.com/melg88/api-jobs-courses-impulseAI/blob/main/docs/API_CONSUMER_GUIDE.md
