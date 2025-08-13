@@ -1,10 +1,10 @@
 # Título do Projeto: ImpulsAI
 
-> **Versão:** [1.0.0]  
-> **Data:** 10/08/2025<br>
+> **Versão:** [2.0.0]  
+> **Data:** 13/08/2025<br>
 > **Autor:** Ithalo Rannieri Araujo Soares
 
-## Índice
+## Sumário
 - [Visão Geral do Produto](#1-visão-geral-do-produto)
 - [Arquitetura do Sistema](#2-arquitetura-do-sistema)
 - [Detalhes Técnicos e de Implementação](#3-detalhes-técnicos-e-de-implementação)
